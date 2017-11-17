@@ -1,0 +1,35 @@
+@import './../../style/main.scss';
+
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(79, 79, 79, 0.589);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+
+.modal {
+  @extend .card;
+
+
+  margin-top: -10em;
+  min-width: 40em;
+  min-height: 30em;
+
+  @media (max-width: 767px) {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    height: 100%;
+    width: 100%;
+
+  }
+}

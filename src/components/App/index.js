@@ -3,6 +3,7 @@ import Link from 'redux-first-router-link'
 import { Home, Map, Box } from 'react-feather';
 
 import List from './../List'
+import Modal from './../Modal'
 
 import style from './app.scss'
 
@@ -33,6 +34,7 @@ const App = () =>
     <div className={style.content}>
       <List />
     </div>
+    <Modal />
   </div>
 
 export default App

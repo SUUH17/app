@@ -1,8 +1,9 @@
 const initialState = {
-  dummy: 'dummy'
+  dummy: 'dummy',
+  modalContent: ''
 }
 
-const test = (state = initialState, action) => {
+export const test = (state = initialState, action) => {
   switch (action.type) {
     case 'TEST':
       return {
@@ -14,4 +15,19 @@ const test = (state = initialState, action) => {
   }
 }
 
-export default test
+export const modal = (state = { visible: false }, action) => {
+  switch (action.type) {
+    case 'SHOW_ITEM_MODAL':
+      return {
+        ...state,
+        visible: true
+      }
+    case 'HIDE_MODAL':
+      return {
+        ...state,
+        visible: false
+      }
+    default:
+      return state
+  }
+}

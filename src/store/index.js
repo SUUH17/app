@@ -4,13 +4,13 @@ import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import queryString from 'query-string'
 
-import test from './reducers'
+import {test, modal} from './reducers'
 
 const history = createHistory()
 
 const routesMap = {
   HOME: '/',
-  ROUTE_VIEW_ITEM: '/items/:itemId'
+  SHOW_ITEM_MODAL: '/:itemType/:itemId'
 }
 
 const {
@@ -27,7 +27,8 @@ const {
 
 const rootReducer = combineReducers({
   location: routeReducer,
-  test
+  test,
+  modal
 })
 
 const middlewares = applyMiddleware(routeMiddleware, thunk)
