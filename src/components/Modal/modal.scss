@@ -16,6 +16,9 @@
 }
 
 .backdrop {
+  @media (max-width: 767px) {
+    display: none;
+  }
   position: fixed;
   width: 100%;
   height: 100%;
