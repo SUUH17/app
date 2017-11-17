@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { closeModal } from '../../store/actions'
+import { dismissModal } from '../../store/actions'
 
 import style from './modal.scss'
 
@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  dismiss: () => dispatch(closeModal)
+  dismiss: () => dispatch(dismissModal())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal)
