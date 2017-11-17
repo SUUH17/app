@@ -22,7 +22,7 @@ export const modal = (state = { visible: false }, action) => {
         ...state,
         visible: true
       }
-    case 'HIDE_MODAL':
+    case 'CLOSE_MODAL':
       return {
         ...state,
         visible: false
