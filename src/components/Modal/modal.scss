@@ -11,7 +11,7 @@
   align-items: center;
 
   @media (max-width: 767px) {
-    display: block;
+    align-items: stretch;
   }
 }
 
@@ -37,8 +37,23 @@
     margin: 0;
     border-radius: 0;
     border: none;
-    height: 100%;
-    width: 100%;
 
+    min-width: initial;
+    min-height: initial;
+    flex: 1;
   }
+}
+
+.modalHeader {
+  padding: .2em;
+  display: flex;
+  align-items: center;
+
+  h4 {
+    margin: 0;
+  }
+}
+
+.modalContent {
+  padding: .4em 0;
 }
