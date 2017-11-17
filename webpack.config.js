@@ -46,13 +46,12 @@ module.exports = {
   },
   output: {
     path: PATHS.dist,
-    publicPath: '/',
     filename: '[name].js'
   },
   devtool: 'cheap-module-source-map',
   devServer: {
     historyApiFallback: {
-      index: '/index.html'
+      index: 'src/index.html'
     }
   },
   module: {
