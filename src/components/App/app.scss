@@ -8,14 +8,14 @@
   display: flex;
   background: white;
   padding: .4em;
-  border-bottom: 1px solid $grey;
+  border-bottom: 1px solid $lightgrey;
   justify-content: space-between;
 
   @media (max-width: 767px) {
     top: initial;
     bottom: 0;
     border-bottom: none;
-    border-top: 1px solid $grey;
+    border-top: 1px solid $lightgrey;
   }
 }
 
@@ -37,6 +37,7 @@
   @extend .highlighted;
   margin: .4em .2em;
   display: flex;
+  color: $lightgrey;
   justify-content: center;
   align-items: center;
 
@@ -53,6 +54,10 @@
       margin: .2em;
     }
   }
+}
+
+.activeLink {
+  color: $accentcolor;
 }
 
 .content {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'redux-first-router-link'
+import { NavLink } from 'redux-first-router-link'
 import { Home, Map, Box } from 'react-feather';
 import { connect } from 'react-redux'
 
@@ -18,18 +18,25 @@ const Logo = () =>
 const Header = () =>
   <div className={style.header}>
     <div className={style.nav}>
-      <Link className={style.link} to='/'>
+      <NavLink
+        activeClassName={style.activeLink}
+        exact={true}
+        className={style.link} to={{type: 'HOME'}}>
         <Home />
         Home
-      </Link>
-      <Link className={style.link} to='/rent/'>
-          <Box />
-          Rent
-        </Link>
-      <Link className={style.link} to='/map'>
+      </NavLink>
+      <NavLink
+        activeClassName={style.activeLink}
+        className={style.link} to={{type: 'SHOW_RENT'}}>
+        <Box />
+        Rent
+      </NavLink>
+      <NavLink
+        activeClassName={style.activeLink}
+        className={style.link} to={{type: 'SHOW_MAP'}}>
         <Map />
         Map
-      </Link>
+      </NavLink>
     </div>
     <Search className={style.navSearch} />
   </div>
