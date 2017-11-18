@@ -65,7 +65,7 @@ export function uploadImage (file) {
     const formData = new FormData()
     formData.append('image', file)
     dispatch(startImageUpload)
-    return fetch(API_DATA + 'images/', {
+    return fetch(API_BASE + 'images/', {
       method: 'POST',
       body: formData
     })

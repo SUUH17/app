@@ -1,15 +1,34 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import { uploadRental } from './../../store/actions'
 
 import styles from './newRent.scss'
 
 class NewRent extends React.Component {
   imageSelected = (e) => {
     const files = e.target.files
-    if (this.imagePreview) {
+    if (this.imagePreview && files[0]) {
       this.imagePreview.setAttribute('src', window.URL.createObjectURL(files[0]))
     }
   }
-  
+  submitForm = () => {
+    const rentalData = {
+      name: '',
+      address: '',
+      price: '',
+      collateral: ''
+    }
+
+    if (this.imageSelector) {
+      const files = this.imageSelector.files
+      console.log(files)
+      if (files[0]) {
+        const file = files[0]
+        this.props.submitRental(rentalData, file)
+      }
+    }
+  }
   render () {
     return (
       <div className={styles.container}>
@@ -45,13 +64,24 @@ class NewRent extends React.Component {
             <input 
               type="file"
               accept="image/png, image/jpeg"
+              ref={ref => { this.imageSelector = ref }}
               onChange={this.imageSelected}
               />
           </div>
 
           <div className={styles.buttons}>
-            <button className={styles.cancelButton}>Cancel</button>
-            <button className={styles.button}>Create</button>
+            <button 
+              className={styles.cancelButton}
+            >
+              Cancel
+            </button>
+
+            <button
+              className={styles.button}
+              onClick={this.submitForm}
+            >
+              Create
+            </button>
           </div>
         </div>
       </div>
@@ -59,13 +89,8 @@ class NewRent extends React.Component {
   }
 }
 
-export default NewRent
+const mapDispatchToProps = dispatch => ({
+  submitRental: (data, imageFile) => dispatch(uploadRental(data, imageFile))
+})
 
-/**
- * 
- * 
-    Address
-    Picture
-    Price per hour
-    Collateral
- */
+export default connect(null, mapDispatchToProps)(NewRent)
