@@ -44,8 +44,26 @@ export const search = (state = { searchString: '' }, action) => {
   }
 }
 
-export const api = (state = { items: [] }, action) => {
+export const api = (state = { items: [], loading: false, error: false }, action) => {
   switch (action.type) {
+    case 'GET_ITEM_START':
+      return {
+        ...state,
+        loading: true,
+        error: false
+      }
+    case 'GET_ITEM_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        error: false
+      }
+    case 'GET_ITEM_FAILED':
+      return {
+        ...state,
+        loading: false,
+        error: true
+      }
     case 'ADD_ITEM':
       return {
         ...state,

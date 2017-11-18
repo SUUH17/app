@@ -30,22 +30,46 @@ export const addItems = (items) => ({
   value: { items }
 })
 
+export const startGetItem = {
+  type: 'GET_ITEM_START'
+}
+
+export const successGetItem = {
+  type: 'GET_ITEM_SUCCESS'
+}
+
+export const failedGetItem = {
+  type: 'GET_ITEM_FAILED'
+}
+
 export function getItem (id) {
-  return dispatch =>
-    fetch(API_BASE + `items/${id}`)
+  return dispatch => {
+    dispatch(startGetItem)
+    return fetch(API_BASE + `items/${id}`)
       .then(res => res.json())
-      .then(json =>
+      .then(json => {
+        dispatch(successGetItem)
         dispatch(addItem(json))
-      )
+      })
+      .catch(err => {
+        dispatch(failedGetItem)
+      })
+  }
 }
 
 export function getItems () {
-  return dispatch =>
-    fetch(API_BASE + 'items/')
+  return dispatch => {
+    dispatch(startGetItem)
+    return fetch(API_BASE + 'items/')
       .then(res => res.json())
-      .then(json =>
+      .then(json => {
+        dispatch(successGetItem)
         dispatch(addItems(json))
-      )
+      })
+      .catch(err => {
+        dispatch(failedGetItem)
+      })
+  }
 }
 
 export const startImageUpload = {
@@ -71,10 +95,11 @@ export function uploadImage (file) {
     })
       .then(res => res.json())
       .then(json => {
-        dispatch(successImageUpload)
-        console.log(json)
-        // return image id
-        return true
+        if (json._id) {
+          dispatch(successImageUpload)
+          return json._id
+        }
+        return null
       })
       .catch(err => {
         dispatch(failedImageUpload)
@@ -96,16 +121,13 @@ export const failedRentalUpload = {
 }
 
 export function uploadRental (data, file) {
+  console.log(data)
   return dispatch => {
     // first upload image
     // if successfull, continue to upload rental
     dispatch(uploadImage(file))
-      .then(res => {
-        if (res) {
-          console.log(res)
-          // res should be image id
-          // upload rental item with image id
-          const imageId = '0'
+      .then(imageId => {
+        if (!!imageId) {
           const item = {
             ...data,
             imageId
@@ -113,13 +135,12 @@ export function uploadRental (data, file) {
           dispatch(startRentalUpload)
           fetch(API_BASE + 'items/', {
             method: 'POST',
-            body: item
+            body: JSON.stringify(item)
           })
             .then(res => res.json())
             .then(json => {
-              const item = json
               dispatch(successRentalUpload)
-              dispatch(addItem(item))
+              dispatch(getItems())
             })
             .catch(dispatch(failedRentalUpload))
         }

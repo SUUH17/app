@@ -1,7 +1,7 @@
 import React from 'react'
-import {  connect } from 'react-redux'
+import { connect } from 'react-redux'
 
-import {  uploadRental } from './../../store/actions'
+import { uploadRental } from './../../store/actions'
 
 import styles from './newRent.scss'
 
@@ -16,9 +16,9 @@ class NewRent extends React.Component {
     super()
     this.state = {
       name: undefined,
-      address: undefined,
-      price: undefined,
-      collateral: undefined
+      location: undefined,
+      price: 0,
+      collateral: 0
     }
   }
   handleInput = (key) =>
@@ -44,6 +44,16 @@ class NewRent extends React.Component {
       }
     }
   }
+  canSubmit = () => {
+    const { name, location, price, collateral } = this.state
+    const files = this.imageSelector && this.imageSelector.files
+    return 
+      !!files
+      && !!name
+      && !!location
+      && !!price
+      && !!collateral
+  }
   render () {
     return (
       <div className={styles.container}>
@@ -52,7 +62,7 @@ class NewRent extends React.Component {
 
           <Field field="name" type="text" label="Item name" handler={this.handleInput} />
 
-          <Field field="address" type="text" label="Address" handler={this.handleInput} />
+          <Field field="location" type="text" label="Address" handler={this.handleInput} />
 
           <Field field="price" type="number" label="Price per hour" handler={this.handleInput} />
 
@@ -82,7 +92,9 @@ class NewRent extends React.Component {
             <button
               className={styles.button}
               onClick={this.submitForm}
+              disabled={!this.canSubmit}
             >
+              { this.canSubmit() ? 'y' : 'n' }
               Create
             </button>
           </div>
