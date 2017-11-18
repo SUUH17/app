@@ -31,10 +31,14 @@
 
 .modal {
   @extend .card;
+  border: none;
+  padding: 0;
+  overflow: hidden;
 
   z-index: 1;
   margin-top: -10em;
   min-width: 40em;
+  max-width: 40em;
   min-height: 30em;
 
   @media (max-width: 767px) {
@@ -42,16 +46,17 @@
     border-radius: 0;
     border: none;
 
+
     min-width: initial;
+    max-width: initial;
     min-height: initial;
     flex: 1;
   }
 }
 
 .modalHeader {
-  padding: .2em;
-  display: flex;
-  align-items: center;
+  padding: .8em;
+  overflow: hidden;
 
   h4 {
     margin: 0;
@@ -59,5 +64,41 @@
 }
 
 .modalContent {
-  padding: .4em 0;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  background: #40434a;
+}
+
+.imageContainer {
+  height: 19em;
+  width: auto;
+  background-origin: center;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.infoContainer {
+  flex: 1;
+  padding: .8em;
+  background: white;
+}
+
+.infoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .4em;
+
+  h2 {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+  }
+}
+
+.price {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 1.2em;
 }
