@@ -1,0 +1,19 @@
+@import './../../style/main.scss';
+
+.container {
+  margin-bottom: 6em;
+  max-width: 30em;
+}
+
+.loginForm {
+  max-width: 30em;
+  @extend .form;
+}
+
+.formField {
+  @extend .field;
+}
+
+.button {
+  @extend .roundedButton;
+}

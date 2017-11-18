@@ -11,13 +11,14 @@ const history = createHistory()
 
 const routesMap = {
   HOME: '/',
+  SHOW_LOGIN: '/login',
   SHOW_RENT_MODAL: '/rent/:itemId',
   SHOW_RENT: {
     path: '/rent',
     thunk: getItems()
   },
   NEW_RENTAL: '/new_rent',
-  SHOW_MAP: '/map'
+  SHOW_MAP: '/map',
 }
 
 const {

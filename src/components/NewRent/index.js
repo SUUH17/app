@@ -94,7 +94,6 @@ class NewRent extends React.Component {
               onClick={this.submitForm}
               disabled={!this.canSubmit}
             >
-              { this.canSubmit() ? 'y' : 'n' }
               Create
             </button>
           </div>

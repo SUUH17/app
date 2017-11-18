@@ -45,7 +45,13 @@ export const failedGetItem = {
 export function getItem (id) {
   return dispatch => {
     dispatch(startGetItem)
-    return fetch(API_BASE + `items/${id}`)
+    return fetch(API_BASE + `items/${id}`, {
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
       .then(res => res.json())
       .then(json => {
         dispatch(successGetItem)
@@ -60,7 +66,13 @@ export function getItem (id) {
 export function getItems () {
   return dispatch => {
     dispatch(startGetItem)
-    return fetch(API_BASE + 'items/')
+    return fetch(API_BASE + 'items/', {
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
       .then(res => res.json())
       .then(json => {
         dispatch(successGetItem)
@@ -91,6 +103,7 @@ export function uploadImage (file) {
     dispatch(startImageUpload)
     return fetch(API_BASE + 'images/', {
       method: 'POST',
+      credentials: 'include',
       body: formData
     })
       .then(res => res.json())
@@ -135,6 +148,11 @@ export function uploadRental (data, file) {
           dispatch(startRentalUpload)
           fetch(API_BASE + 'items/', {
             method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json'
+            },
             body: JSON.stringify(item)
           })
             .then(res => res.json())
@@ -149,5 +167,29 @@ export function uploadRental (data, file) {
         console.log(err)
         console.log('cant upload rental')
       })
+  }
+}
+
+export function login (username, password) {
+  return dispatch => {
+    dispatch({ type: 'LOGIN_START' })
+    return fetch(API_BASE + 'auth/login', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    })
+      .then(res => res.status === 200)
+      .then(yes => {
+        if (yes) {
+          dispatch({ type: 'LOGIN_SUCCESS' })
+        } else {
+          return Promise.reject()
+        }
+      })
+      .catch(() => dispatch({ type: 'LOGIN_FAILED' }))
   }
 }
