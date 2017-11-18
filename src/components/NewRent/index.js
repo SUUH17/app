@@ -46,9 +46,9 @@ class NewRent extends React.Component {
   }
   canSubmit = () => {
     const { name, location, price, collateral } = this.state
-    const files = this.imageSelector && this.imageSelector.files
+    const files = this.imageSelector && this.imageSelector.files.length >= 0
     return 
-      !!files
+      files
       && !!name
       && !!location
       && !!price
