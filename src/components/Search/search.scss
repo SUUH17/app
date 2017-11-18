@@ -2,8 +2,18 @@
 
 .searchInput {
   display: flex;
+  align-items: center;
   input {
     @extend .input;
   }
   margin: .6em;
+}
+
+.cross {
+  margin: .2em;
+  margin-left: -2.2em;
+  width: 1.4em;
+  height: 1.4em;
+  color: #aaa;
+  transition: opacity .2s;
 }
