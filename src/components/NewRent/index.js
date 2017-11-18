@@ -1,11 +1,31 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {  connect } from 'react-redux'
 
-import { uploadRental } from './../../store/actions'
+import {  uploadRental } from './../../store/actions'
 
 import styles from './newRent.scss'
 
+const Field = ({ field, label, type, handler }) =>
+  <div className={styles.formField}>
+    <span>{label}</span>
+    <input type={type} onChange={handler(field)} />
+  </div>
+
 class NewRent extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      name: undefined,
+      address: undefined,
+      price: undefined,
+      collateral: undefined
+    }
+  }
+  handleInput = (key) =>
+    event =>
+      this.setState({
+        [key]: event.target.value
+      })
   imageSelected = (e) => {
     const files = e.target.files
     if (this.imagePreview && files[0]) {
@@ -13,12 +33,7 @@ class NewRent extends React.Component {
     }
   }
   submitForm = () => {
-    const rentalData = {
-      name: '',
-      address: '',
-      price: '',
-      collateral: ''
-    }
+    const rentalData = this.state
 
     if (this.imageSelector) {
       const files = this.imageSelector.files
@@ -32,45 +47,34 @@ class NewRent extends React.Component {
   render () {
     return (
       <div className={styles.container}>
+        {JSON.stringify(this.state)}
         <h2>Create new rental</h2>
         <div className={styles.rentalForm}>
 
-          <div className={styles.formField}>
-            <span>Item name</span>
-            <input type="text" placeholder="name" />
-          </div>
+          <Field field="name" type="text" label="Item name" handler={this.handleInput} />
 
-          <div className={styles.formField}>
-            <span>Address</span>
-            <input type="text" placeholder="address" />
-          </div>
+          <Field field="address" type="text" label="Address" handler={this.handleInput} />
 
-          <div className={styles.formField}>
-            <span>Price per hour</span>
-            <input type="number" placeholder="price" />
-          </div>
+          <Field field="price" type="number" label="Price per hour" handler={this.handleInput} />
 
-          <div className={styles.formField}>
-            <span>Collateral</span>
-            <input type="number" placeholder="collateral" />
-          </div>
+          <Field field="collateral" type="number" label="Collateral" handler={this.handleInput} />
 
           <div className={styles.formField}>
             <span>Image</span>
-            <img 
+            <img
               className={styles.imagePreview}
               ref={ref => { this.imagePreview = ref }}>
-              </img>
-            <input 
+            </img>
+            <input
               type="file"
               accept="image/png, image/jpeg"
               ref={ref => { this.imageSelector = ref }}
               onChange={this.imageSelected}
-              />
+            />
           </div>
 
           <div className={styles.buttons}>
-            <button 
+            <button
               className={styles.cancelButton}
             >
               Cancel
