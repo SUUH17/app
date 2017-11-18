@@ -8,6 +8,8 @@ import RentForm from './../RentForm'
 import { dismissModal } from '../../store/actions'
 import { selectItem } from '../../store/selectors'
 
+import ItemInfo from './../ItemInfo'
+
 import style from './modal.scss'
 
 const LoginModal = ({ dismiss }) =>
@@ -48,7 +50,7 @@ const ItemModal = ({ data, dismiss, openRent }) =>
           <h2>{data.name}</h2>
           <span className={style.price}>{data.price + ' €/h'}</span>
         </div>
-        <span>{data.location}</span>
+        <ItemInfo id={data.id} />
         <button
           className={style.superRentButton}
           onClick={() => openRent(data.id)}
