@@ -26,9 +26,17 @@ const NewRent = () =>
         <span>Collateral</span>
         <input type="number" placeholder="collateral" />
       </div>
+
+      <div className={styles.formField}>
+        <span>Image</span>
+        <input type="file" />
+      </div>
     </div>
 
-    <button className={styles.button}>Create</button>
+    <div className={styles.buttons}>
+      <button className={styles.cancelButton}>Cancel</button>
+      <button className={styles.button}>Create</button>
+    </div>
   </div>
 
 export default NewRent
