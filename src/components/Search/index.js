@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { X as CrossIcon } from 'react-feather'
+import { XCircle as CrossIcon } from 'react-feather'
 
 import { setSearch } from './../../store/actions'
 
