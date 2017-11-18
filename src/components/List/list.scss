@@ -21,3 +21,14 @@
     grid-gap: .1em;
   }
 }
+
+.listSearch {
+  @media (min-width: 768px) {
+    display: none;
+  }
+
+  input {
+    padding: .8em;
+    border-radius: 1.4em;
+  }
+}

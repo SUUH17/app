@@ -46,18 +46,21 @@ body {
   @extend .rounded;
   margin: .4em;
   background: white;
-  border: 1px solid $lightestgrey;
+  border: 1px solid $lightgrey;
 }
 
 .input {
   outline: none;
   padding: .4em;
-  border-radius: 2em;
-  border: 1px solid $lightergrey;
+  border-radius: 1em;
+  border: 1px solid $lightgrey;
   font-size: 1em;
   background-color: $lightestgrey;
+  color: rgb(55, 55, 55);
+  width: 100%;
 
   &:focus {
     background-color: white;
+    color: black;
   }
 }
