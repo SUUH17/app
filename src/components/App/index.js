@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import List from './../List'
 import Modal from './../Modal'
 import MapView from './../Map'
+import Search from './../Search'
 
 import style from './app.scss'
 
@@ -16,18 +17,21 @@ const Logo = () =>
 
 const Header = () =>
   <div className={style.header}>
-    <Link className={style.link} to='/'>
-      <Home />
-      Home
-    </Link>
-    <Link className={style.link} to='/rent/'>
-      <Box />
-      Rent
-    </Link>
-    <Link className={style.link} to='/map'>
-      <Map />
-      Map
-    </Link>
+    <div className={style.nav}>
+      <Link className={style.link} to='/'>
+        <Home />
+        Home
+      </Link>
+      <Link className={style.link} to='/rent/'>
+          <Box />
+          Rent
+        </Link>
+      <Link className={style.link} to='/map'>
+        <Map />
+        Map
+      </Link>
+    </div>
+    <Search className={style.navSearch} />
   </div>
 
 const HomeView = () =>

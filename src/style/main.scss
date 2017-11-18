@@ -48,3 +48,16 @@ body {
   background: white;
   border: 1px solid $lightestgrey;
 }
+
+.input {
+  outline: none;
+  padding: .4em;
+  border-radius: 2em;
+  border: 1px solid $lightergrey;
+  font-size: 1em;
+  background-color: $lightestgrey;
+
+  &:focus {
+    background-color: white;
+  }
+}

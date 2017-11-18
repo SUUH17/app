@@ -1,0 +1,9 @@
+@import './../../style/main.scss';
+
+.searchInput {
+  display: flex;
+  input {
+    @extend .input;
+  }
+  margin: .6em;
+}

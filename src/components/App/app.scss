@@ -9,13 +9,27 @@
   background: white;
   padding: .4em;
   border-bottom: 1px solid $grey;
+  justify-content: space-between;
 
   @media (max-width: 767px) {
     top: initial;
     bottom: 0;
     border-bottom: none;
     border-top: 1px solid $grey;
+  }
+}
+
+.nav {
+  display: flex;
+  @media (max-width: 767px) {
+    flex: 1;
     justify-content: space-around;
+  }
+}
+
+.navSearch {
+  @media (max-width: 767px) {
+    display: none;
   }
 }
 
