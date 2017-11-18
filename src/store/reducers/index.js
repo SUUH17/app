@@ -15,6 +15,35 @@ export const test = (state = initialState, action) => {
   }
 }
 
+export const user = (state = { ownerId: '', loggedIn: false, error: false }, action) => {
+  switch (action.type) {
+    case 'LOGIN_START':
+      return {
+        ...state,
+        loggedIn: false,
+        error: false
+      }
+    case 'LOGIN_SUCCESS':
+    case 'LOGGED_IN':
+      return {
+        ...state,
+        ownerId: action.value.ownerId,
+        loggedIn: true,
+        error: false
+      }
+    case 'LOGIN_FAILED':
+    case 'NOT_LOGGED_IN':
+      return {
+        ...state,
+        ownerId: undefined,
+        loggedIn: false,
+        error: true
+      }
+    default:
+      return state
+  }
+}
+
 export const modal = (state = { visible: false }, action) => {
   switch (action.type) {
     case 'SHOW_RENT_MODAL':

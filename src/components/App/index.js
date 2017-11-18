@@ -9,6 +9,8 @@ import MapView from './../Map'
 import Search from './../Search'
 import NewRent from './../NewRent'
 
+import { cookieToRedux } from './../../store/actions'
+
 import style from './app.scss'
 
 const Logo = () =>
@@ -59,11 +61,12 @@ const getView = (page) => {
     case 'NEW_RENTAL':
       return <NewRent />
     default:
-      return <HomeView />
+      return <List />
   }
 }
 
-const App = ({page}) => {
+const App = ({page, cookieToRedux}) => {
+  cookieToRedux(document.cookie)
   return <div>
     <Header page={page} />
     <div className={style.content}>
@@ -77,4 +80,8 @@ const mapStateToProps = state => ({
   page: state.location.type
 })
 
-export default  connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => ({
+  cookieToRedux: (cookie) => dispatch(cookieToRedux(cookie))
+})
+
+export default  connect(mapStateToProps, mapDispatchToProps)(App)

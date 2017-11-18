@@ -185,11 +185,54 @@ export function login (username, password) {
       .then(res => res.status === 200)
       .then(yes => {
         if (yes) {
-          dispatch({ type: 'LOGIN_SUCCESS' })
+          dispatch({
+            type: 'LOGIN_SUCCESS', value: {
+              ownerId: getOwnerId()
+            }
+          })
         } else {
           return Promise.reject()
         }
       })
       .catch(() => dispatch({ type: 'LOGIN_FAILED' }))
+  }
+}
+
+export function checkLogin () {
+  console.log('checkLogin')
+  return dispatch => {
+    console.log('checking')
+    const ownerId = getOwnerId()
+    if (ownerId) {
+      console.log('has cookie')
+      return Promise.resolve(dispatch({
+        type: 'LOGIN_SUCCESS', value: {
+          ownerId
+        }
+      }))
+    }
+    return Promise.resolve()
+  }
+}
+
+export function cookieToRedux (cookieString) {
+  return dispatch => {
+    if (cookieString) {
+      const ownerId = cookieString.split('session=')[1]
+      dispatch({
+        type: 'LOGGED_IN', value: {
+          ownerId
+        }
+      })
+    } else {
+      dispatch({ type: 'NOT_LOGGED_IN' })
+    }
+  }
+}
+
+const getOwnerId = () => {
+  const cookie = document.cookie
+  if (cookie) {
+    return cookie.split('session=')[1]
   }
 }

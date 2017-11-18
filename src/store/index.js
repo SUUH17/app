@@ -5,7 +5,7 @@ import createHistory from 'history/createBrowserHistory'
 import queryString from 'query-string'
 import { getItems } from './actions'
 
-import { test, modal, search, api } from './reducers'
+import { test, modal, search, api, user } from './reducers'
 
 const history = createHistory()
 
@@ -38,7 +38,8 @@ const rootReducer = combineReducers({
   test,
   modal,
   search,
-  api
+  api,
+  user
 })
 
 const middlewares = applyMiddleware(routeMiddleware, thunk)
