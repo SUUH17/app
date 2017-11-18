@@ -18,10 +18,10 @@ const Item = ({ data, openItem }) =>
         className={styles.image} 
         src={API_BASE + `images/${data.imageId}`}
         style={{
-          filter: 'blur(10px)'
+          filter: !data.available ? 'blur(10px)' : undefined
         }}
       />
-      {data.available && <span>RENTED</span>}
+      {!data.available && <span>RENTED</span>}
     </div>
     <div className={styles.infoContainer}>
       <h4>{data.name}</h4>
