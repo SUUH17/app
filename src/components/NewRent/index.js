@@ -9,6 +9,7 @@ class NewRent extends React.Component {
       this.imagePreview.setAttribute('src', window.URL.createObjectURL(files[0]))
     }
   }
+  
   render () {
     return (
       <div className={styles.container}>

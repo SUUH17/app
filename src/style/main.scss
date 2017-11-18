@@ -56,7 +56,7 @@ body {
 .input {
   outline: none;
   padding: .4em;
-  border-radius: 1em;
+  border-radius: .2em;
   border: 1px solid $lightgrey;
   font-size: 1em;
   background-color: #f7f7f7;
@@ -82,7 +82,6 @@ body {
 
   input {
     @extend .input;
-    border-radius: .2em;
     max-width: 30em;
   }
 }
