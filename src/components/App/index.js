@@ -20,7 +20,7 @@ const Header = () =>
       <Home />
       Home
     </Link>
-    <Link className={style.link} to='/items/'>
+    <Link className={style.link} to='/rent/'>
       <Box />
       Rent
     </Link>
@@ -41,7 +41,8 @@ const getView = (page) => {
       return <HomeView />
     case 'SHOW_MAP':
       return <Map />
-    case 'SHOW_ITEMS':
+    case 'SHOW_RENT':
+    case 'SHOW_RENT_MODAL':
       return <List />
     default:
       return <HomeView />

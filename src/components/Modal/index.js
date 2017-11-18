@@ -39,7 +39,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  dismiss: () => dispatch(dismissModal())
+  dismiss: () => dispatch(dismissModal({type: 'SHOW_RENT'}))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalContainer)

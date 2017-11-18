@@ -10,8 +10,8 @@ const history = createHistory()
 
 const routesMap = {
   HOME: '/',
-  SHOW_ITEM_MODAL: '/:itemType/:itemId',
-  SHOW_ITEMS: '/items',
+  SHOW_RENT_MODAL: '/rent/:itemId',
+  SHOW_RENT: '/rent',
   SHOW_MAP: '/map'
 }
 

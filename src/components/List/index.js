@@ -17,9 +17,8 @@ const List = () =>
         <div>index: {i}</div>
         <Link 
           to={{
-            type: 'SHOW_ITEM_MODAL', 
+            type: 'SHOW_RENT_MODAL', 
             payload: {
-              itemType: 'rentable',
               itemId: i
             }
           }}>Open</Link>

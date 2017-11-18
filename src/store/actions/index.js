@@ -6,9 +6,9 @@ export const toHome = {
   type: 'HOME'
 }
 
-export function dismissModal() {
+export function dismissModal(action = toHome) {
   return dispatch => {
     dispatch(closeModal)
-    dispatch(toHome)
+    dispatch(action)
   }
 }

@@ -17,7 +17,7 @@ export const test = (state = initialState, action) => {
 
 export const modal = (state = { visible: false }, action) => {
   switch (action.type) {
-    case 'SHOW_ITEM_MODAL':
+    case 'SHOW_RENT_MODAL':
       return {
         ...state,
         visible: true
