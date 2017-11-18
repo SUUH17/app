@@ -20,6 +20,11 @@ export const setSearch = searchString => ({
   value: searchString
 })
 
+export const setFilterByYou = bool => ({
+  type: 'SET_FILTER_BY_YOU',
+  value: bool
+})
+
 export const addItem = (item) => ({
   type: 'ADD_ITEM',
   value: { item }

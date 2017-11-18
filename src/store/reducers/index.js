@@ -70,6 +70,11 @@ export const search = (state = { searchString: '' }, action) => {
         ...state,
         searchString: action.value
       }
+    case 'SET_FILTER_BY_YOU':
+      return {
+        ...state,
+        filterOwn: action.value
+      }
     default:
       return state
   }

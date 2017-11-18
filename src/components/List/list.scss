@@ -94,3 +94,15 @@
     padding: .8em;
   }
 }
+
+.setFilter {
+  display: flex;
+  justify-content: center;
+  padding: .4em;
+  button {
+    @extend .roundedButton;
+    border-radius: 3em;
+    margin: 0 .4em;
+    min-width: 6em;
+  }
+}

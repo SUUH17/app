@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
 
 import { getFilteredItems } from './../../store/selectors'
+import { setFilterByYou } from './../../store/actions'
 
 import Search from './../Search'
 
@@ -30,9 +31,13 @@ const Item = ({ data, openItem }) =>
     </div>
   </div>
 
-const List = ({ searchString, filteredItems, openItem }) =>
+const List = ({ searchString, filteredItems, openItem, setFilter }) =>
   <div>
     <Search className={styles.listSearch} />
+    { false && <div className={styles.setFilter}>
+        <button>Others</button>
+        <button>Mine</button>
+    </div> }
     <div className={styles.list}>
       {(filteredItems ||  []).map(item => 
         <Item key={item.id} data={item} openItem={openItem} />)}
@@ -50,6 +55,10 @@ const mapDispatchToProps = dispatch => ({
     payload: {
       itemId: id
     }
+  }),
+  setFilter: bool => dispatch({
+    type: 'SET_FILTER_BY_YOU',
+    value: bool
   })
 })
 
