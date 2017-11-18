@@ -44,38 +44,22 @@ export const search = (state = { searchString: '' }, action) => {
   }
 }
 
-const initialApi = {
-  items: [
-    {
-      name: 'Vasara'
-    },
-    {
-      name: 'Iso vasara'
-    },
-    {
-      name: 'Vanha vasara'
-    },
-    {
-      name: 'Hammer'
-    },
-    {
-      name: 'Nuija'
-    },
-    {
-      name: 'Porakone'
-    },
-    {
-      name: 'Akkuporakone'
-    },
-    {
-      name: 'Drill'
-    },
-    {
-      name: 'Pneumatic drill'
-    }
-  ].map((i, idx) => ({ ...i, id: idx }))
-}
-
-export const api = (state = initialApi, action) => {
-  return state
+export const api = (state = { items: [] }, action) => {
+  switch (action.type) {
+    case 'ADD_ITEM':
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          action.value.item
+        ]
+      }
+    case 'SET_ITEMS':
+      return {
+        ...state,
+        items: action.value.items
+      }
+    default:
+      return state
+  }
 }

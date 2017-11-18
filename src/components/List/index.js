@@ -16,7 +16,7 @@ const Item = ({data}) =>
       to={{
         type: 'SHOW_RENT_MODAL',
         payload: {
-          itemId: data.id
+          itemId: data._id
         }
       }}>Open</Link>
   </div>
@@ -25,7 +25,7 @@ const List = ({searchString, filteredItems}) =>
   <div>
     <Search className={styles.listSearch} />
     <div className={styles.list}>
-      { (filteredItems || []).map(item => <Item key={item.id} data={item} />) }
+      { (filteredItems || []).map(item => <Item key={item._id} data={item} />) }
     </div>
   </div>
 

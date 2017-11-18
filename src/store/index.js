@@ -3,15 +3,19 @@ import { connectRoutes } from 'redux-first-router'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import queryString from 'query-string'
+import { getItems } from './actions'
 
-import {test, modal, search, api} from './reducers'
+import { test, modal, search, api } from './reducers'
 
 const history = createHistory()
 
 const routesMap = {
   HOME: '/',
   SHOW_RENT_MODAL: '/rent/:itemId',
-  SHOW_RENT: '/rent',
+  SHOW_RENT: {
+    path: '/rent',
+    thunk: getItems()
+  },
   SHOW_MAP: '/map'
 }
 
@@ -20,8 +24,8 @@ const {
   middleware: routeMiddleware,
   enhancer: routeEnhancer
 } = connectRoutes(
-    history, 
-    routesMap, 
+    history,
+    routesMap,
     {
       querySerializer: queryString
     }

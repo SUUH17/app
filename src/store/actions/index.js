@@ -1,4 +1,4 @@
-import fetch from 'whatwg-fetch'
+import 'whatwg-fetch'
 
 export const closeModal = {
   type: 'CLOSE_MODAL'
@@ -8,7 +8,7 @@ export const toHome = {
   type: 'HOME'
 }
 
-export function dismissModal(action = toHome) {
+export function dismissModal (action = toHome) {
   return dispatch => {
     dispatch(closeModal)
     dispatch(action)
@@ -26,26 +26,28 @@ export const addItem = (item) => ({
 })
 
 export const addItems = (items) => ({
-  type: 'ADD_ITEMS',
+  type: 'SET_ITEMS',
   value: { items }
 })
 
-export function getItem(id) {
-  // load from api @ localhost:5000/item/:id
-  return fetch(API_BASE + `items/${id}`)
-    .then(res => res.json())
-    .then(json => 
-      console.log(json)
-      // dispatch(addItem(item))
-    )
+export function getItem (id) {
+  return dispatch =>
+    fetch(API_BASE + `items/${id}`)
+      .then(res => res.json())
+      .then(json =>
+        dispatch(addItem(json))
+      )
 }
 
-export function getItems() {
-  // load from api @ localhost:5000/item/:id
-  return fetch(API_BASE + 'items/')
-    .then(res => res.json())
-    .then(json => 
-      console.log(json)
-      // dispatch(addItems(items))
-    )
+export function getItems () {
+  return dispatch =>
+    fetch(API_BASE + 'items/')
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        return json
+      })
+      .then(json =>
+        dispatch(addItems(json))
+      )
 }
