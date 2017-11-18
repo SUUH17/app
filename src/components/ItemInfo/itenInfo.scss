@@ -1,25 +1,5 @@
 @import './../../style/main.scss';
 
-.container {
-  @extend .container;
-  background: white;
-
-  h3 {
-    font-weight: 400;
-  }
-}
-
-.rentButton {
-  @extend .roundedButton;
-  margin-top: 2em;
-  font-size: 1.2em;
-  background: $green;
-}
-
-.rentalForm {
-  @extend .form;
-}
-
 .formField {
   @extend .field;
   border-bottom: 1px solid #dedede;
@@ -39,15 +19,6 @@
   strong {
     font-weight: 300;
     color: #505050;
-  }
-}
-
-.parties {
-  display: flex;
-  justify-content: space-between;
-
-  span {
-    
   }
 }
 

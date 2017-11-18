@@ -147,8 +147,7 @@
 
 .superRentButton {
   @extend .roundedButton;
-  flex: 1;
+  align-self: flex-start;
   margin-top: 2em;
-  font-size: 1.1em;
-  padding: .8em;
+  font-size: 1.2em;
 }

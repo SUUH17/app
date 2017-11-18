@@ -48,6 +48,7 @@ export const modal = (state = { visible: false }, action) => {
   switch (action.type) {
     case 'SHOW_RENT_MODAL':
     case 'SHOW_LOGIN':
+    case 'SHOW_RENT_FORM':
       return {
         ...state,
         visible: true
