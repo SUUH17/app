@@ -145,9 +145,13 @@
   animation: spin 1s infinite;
 }
 
+.rentOptions {
+  align-self: flex-end;
+  color: grey;
+}
+
 .superRentButton {
   @extend .roundedButton;
-  align-self: flex-end;
   margin-top: .6em;
   font-size: 1.2em;
 }

@@ -51,12 +51,12 @@ const ItemModal = ({ data, dismiss, openRent, ownId }) =>
           <span className={style.price}>{data.price + ' €/h'}</span>
         </div>
         <ItemInfo id={data.id} />
-        { (data.ownerId != ownId) ? <button
+        { (data.ownerId != ownId) ? <span className={style.rentOptions}>Rent using eRent: <button
           className={style.superRentButton}
           onClick={() => openRent(data.id)}
         >
           Rent
-      </button> : <span className={style.yourInfo}>Offered by you</span> }
+      </button></span> : <span className={style.yourInfo}>Offered by you</span> }
       </div>
     </div>) : (
         <div className={style.loading}>
