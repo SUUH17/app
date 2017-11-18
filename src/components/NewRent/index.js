@@ -47,7 +47,6 @@ class NewRent extends React.Component {
   render () {
     return (
       <div className={styles.container}>
-        {JSON.stringify(this.state)}
         <h2>Create new rental</h2>
         <div className={styles.rentalForm}>
 
