@@ -123,6 +123,13 @@ export const api = (state = {
         ...state,
         items: action.value.items
       }
+    case 'SHOW_RENT':
+      return {
+        ...state,
+        uploading: false,
+        uploadError: false,
+        uploadSuccess: false
+      }
     case 'RENTAL_UPLOAD_START':
       return {
         ...state,
