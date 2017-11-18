@@ -16,7 +16,7 @@ class RentForm extends React.Component {
     }
   }
   render () {
-    const { itemId, rent } = this.props
+    const { itemId, rent, renting, rentingSuccess, rentingFailed } = this.props
     return (
       <div className={style.container}>
         <h2>Rent</h2>
@@ -44,7 +44,10 @@ class RentForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  itemId: state.location.payload.itemId
+  itemId: state.location.payload.itemId,
+  renting: state.api.renting,
+  rentingSuccess: state.api.rentingSuccess,
+  rentingFailed: state.api.rentingFailed
 })
 
 const mapDispatchToProps = dispatch => ({

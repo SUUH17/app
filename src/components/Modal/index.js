@@ -56,7 +56,7 @@ const ItemModal = ({ data, dismiss, openRent, ownId }) =>
           onClick={() => openRent(data.id)}
         >
           Rent
-      </button> : <span className={style.yourInfo}>Rented by you</span> }
+      </button> : <span className={style.yourInfo}>Offered by you</span> }
       </div>
     </div>) : (
         <div className={style.loading}>

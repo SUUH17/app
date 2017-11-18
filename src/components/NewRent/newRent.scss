@@ -21,10 +21,15 @@
 
 .button {
   @extend .roundedButton;
+  transition: opacity .2s;
 }
 
 .greenButton {
   background: $green;
+}
+
+.hiddenButton {
+  opacity: 0;
 }
 
 .cancelButton {

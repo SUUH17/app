@@ -257,10 +257,12 @@ export function attemptRent (id) {
       method: 'POST',
       credentials: 'include'
     })
-      .then(res => res.json())
-      .then(json => {
-        dispatch(successRentAttempt)
-        dispatch(getItems())
+      .then(res => res.status === 200)
+      .then(yes => {
+        if (yes) {
+          dispatch(successRentAttempt)
+          dispatch(getItems())
+        }
       })
       .catch(dispatch(failedRentAttempt))
   }

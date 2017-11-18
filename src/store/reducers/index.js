@@ -81,7 +81,10 @@ export const api = (state = {
     apiError: false,
     uploading: false,
     uploadError: false,
-    uploadSuccess: false
+    uploadSuccess: false,
+    renting: false,
+    rentingError: false,
+    rentingSuccess: false
   }, action) => {
   switch (action.type) {
     case 'GET_ITEM_START':
@@ -135,6 +138,27 @@ export const api = (state = {
         uploading: false,
         uploadError: true,
         uploadSuccess: false
+      }
+    case 'RENT_ATTEMPT_START':
+      return {
+        ...state,
+        renting: true,
+        rentingError: false,
+        rentingSuccess: false
+      }
+    case 'RENT_ATTEMPT_SUCCESS':
+      return {
+        ...state,
+        renting: false,
+        rentingError: false,
+        rentingSuccess: true
+      }
+    case 'RENT_ATTEMPT_FAILED':
+      return {
+        ...state,
+        renting: false,
+        rentingError: true,
+        rentingSuccess: false
       }
     default:
       return state

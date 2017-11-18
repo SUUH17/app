@@ -107,7 +107,10 @@ class NewRent extends React.Component {
 
                 <div className={styles.buttons}>
                   <button
-                    className={styles.cancelButton}
+                    className={
+                      styles.cancelButton
+                      + (uploadSuccess ? (' ' + styles.hiddenButton) : '')
+                    }
                     onClick={this.clearForm}
                   >
                     Cancel
