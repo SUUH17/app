@@ -2,10 +2,11 @@
 
 .container {
   @extend .card;
-
+  margin-bottom: 6em;
 }
 
 .rentalForm {
+  max-width: 30em;
   @extend .form;
 }
 
@@ -27,4 +28,10 @@
 .buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.imagePreview {
+  display: block;
+  width: 100%;
+  height: auto;
 }
