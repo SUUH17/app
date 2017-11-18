@@ -31,3 +31,51 @@ export const modal = (state = { visible: false }, action) => {
       return state
   }
 }
+
+export const search = (state = { searchString: 'moi' }, action) => {
+  switch (action.type) {
+    case 'SET_SEARCH':
+      return {
+        ...state,
+        searchString: action.value
+      }
+    default:
+      return state
+  }
+}
+
+const initialApi = {
+  items: [
+    {
+      name: 'Vasara'
+    },
+    {
+      name: 'Iso vasara'
+    },
+    {
+      name: 'Vanha vasara'
+    },
+    {
+      name: 'Hammer'
+    },
+    {
+      name: 'Nuija'
+    },
+    {
+      name: 'Porakone'
+    },
+    {
+      name: 'Akkuporakone'
+    },
+    {
+      name: 'Drill'
+    },
+    {
+      name: 'Pneumatic drill'
+    }
+  ].map((i, idx) => ({ ...i, id: idx }))
+}
+
+export const api = (state = initialApi, action) => {
+  return state
+}

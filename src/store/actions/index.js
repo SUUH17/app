@@ -12,3 +12,8 @@ export function dismissModal(action = toHome) {
     dispatch(action)
   }
 }
+
+export const setSearch = searchString => ({
+  type: 'SET_SEARCH',
+  value: searchString
+})

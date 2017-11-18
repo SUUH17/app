@@ -2,33 +2,36 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
 
+import { getFilteredItems } from './../../store/selectors'
+
 import Search from './../Search'
 
 import styles from './list.scss'
 
-const Item = (props) =>
+const Item = ({data}) =>
   <div className={styles.item}>
     Item
-    {props.children}
+    <div>{data.name}</div>
+    <Link
+      to={{
+        type: 'SHOW_RENT_MODAL',
+        payload: {
+          itemId: data.id
+        }
+      }}>Open</Link>
   </div>
 
-const List = () =>
+const List = ({searchString, filteredItems}) =>
   <div>
     <Search className={styles.listSearch} />
     <div className={styles.list}>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(i =>
-        <Item key={i} props={{ data: 'dummy' }}>
-          <div>index: {i}</div>
-          <Link
-            to={{
-              type: 'SHOW_RENT_MODAL',
-              payload: {
-                itemId: i
-              }
-            }}>Open</Link>
-        </Item>
-      )}
+      { (filteredItems || []).map(item => <Item data={item} />) }
     </div>
   </div>
 
-export default List
+const mapStateToProps = state => ({
+  searchString: state.search.searchString,
+  filteredItems: getFilteredItems(state)
+})
+
+export default connect(mapStateToProps)(List)
