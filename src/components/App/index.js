@@ -1,12 +1,13 @@
 import React from 'react'
 import { NavLink } from 'redux-first-router-link'
-import { Home, Map, Box } from 'react-feather';
+import { Home, Map, Box, FilePlus } from 'react-feather';
 import { connect } from 'react-redux'
 
 import List from './../List'
 import Modal from './../Modal'
 import MapView from './../Map'
 import Search from './../Search'
+import NewRent from './../NewRent'
 
 import style from './app.scss'
 
@@ -15,15 +16,15 @@ const Logo = () =>
     Logo
   </div>
 
-const Header = () =>
+const Header = ({page}) =>
   <div className={style.header}>
     <div className={style.nav}>
       <NavLink
         activeClassName={style.activeLink}
         exact={true}
-        className={style.link} to={{type: 'HOME'}}>
-        <Home />
-        Home
+        className={style.link} to={{type: 'NEW_RENTAL'}}>
+        <FilePlus />
+        New rental
       </NavLink>
       <NavLink
         activeClassName={style.activeLink}
@@ -38,7 +39,7 @@ const Header = () =>
         Map
       </NavLink>
     </div>
-    <Search className={style.navSearch} />
+    { page.indexOf('SHOW_RENT') >= 0 && <Search className={style.navSearch} /> }
   </div>
 
 const HomeView = () =>
@@ -55,6 +56,8 @@ const getView = (page) => {
     case 'SHOW_RENT':
     case 'SHOW_RENT_MODAL':
       return <List />
+    case 'NEW_RENTAL':
+      return <NewRent />
     default:
       return <HomeView />
   }
@@ -62,7 +65,7 @@ const getView = (page) => {
 
 const App = ({page}) => {
   return <div>
-    <Header />
+    <Header page={page} />
     <div className={style.content}>
       { getView(page) }
     </div>

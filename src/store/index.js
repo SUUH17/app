@@ -16,6 +16,7 @@ const routesMap = {
     path: '/rent',
     thunk: getItems()
   },
+  NEW_RENTAL: '/new_rent',
   SHOW_MAP: '/map'
 }
 

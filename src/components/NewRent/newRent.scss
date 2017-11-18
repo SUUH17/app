@@ -1,0 +1,18 @@
+@import './../../style/main.scss';
+
+.container {
+  @extend .card;
+
+}
+
+.rentalForm {
+  @extend .form;
+}
+
+.formField {
+  @extend .field;
+}
+
+.button {
+  @extend .roundedButton;
+}

@@ -26,6 +26,10 @@ body {
   @extend .clickable;
   @extend .rounded;
 
+  font-size: .8em;
+
+  border: none;
+  cursor: pointer;
   color: white;
   background: $accentcolor;
 }
@@ -55,12 +59,34 @@ body {
   border-radius: 1em;
   border: 1px solid $lightgrey;
   font-size: 1em;
-  background-color: $lightestgrey;
+  background-color: #f7f7f7;
   color: #9a9a9a;
-  width: 100%;
 
   &:focus {
     background-color: white;
     color: black;
   }
+}
+
+.field {
+  padding: .2em 0;
+  margin: .8em 0;
+
+  display: flex;
+  flex-direction: column;
+
+  span {
+    display: block;
+    margin: .4em 0;
+  }
+
+  input {
+    @extend .input;
+    border-radius: .2em;
+    max-width: 30em;
+  }
+}
+
+.form {
+  padding: .4em 0;
 }
