@@ -236,3 +236,32 @@ const getOwnerId = () => {
     return cookie.split('session=')[1]
   }
 }
+
+export const startRentAttempt = {
+  type: 'RENT_ATTEMPT_START'
+}
+
+export const successRentAttempt = {
+  type: 'RENT_ATTEMPT_SUCCESS'
+}
+
+export const failedRentAttempt = {
+  type: 'RENT_ATTEMPT_FAILED'
+}
+
+export function attemptRent (id) {
+  return dispatch => {
+    dispatch(startRentAttempt)
+    // try to rent
+    fetch(API_BASE + `loans/borrow/${id}`, {
+      method: 'POST',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(json => {
+        dispatch(successRentAttempt)
+        dispatch(getItems())
+      })
+      .catch(dispatch(failedRentAttempt))
+  }
+}

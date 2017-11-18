@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import Field from './../Field'
 import ItemInfo from './../ItemInfo'
 
+import {  attemptRent } from './../../store/actions'
+
 import style from './rentForm.scss'
 
 class RentForm extends React.Component {
@@ -14,7 +16,7 @@ class RentForm extends React.Component {
     }
   }
   render () {
-    const {  itemId } = this.props
+    const { itemId, rent } = this.props
     return (
       <div className={style.container}>
         <h2>Rent</h2>
@@ -33,7 +35,8 @@ class RentForm extends React.Component {
         </div>
         <button
           className={style.rentButton}
-        >Accept
+          onClick={() => rent(itemId)}
+        >Accept & Rent
         </button>
       </div>
     )
@@ -44,4 +47,8 @@ const mapStateToProps = state => ({
   itemId: state.location.payload.itemId
 })
 
-export default connect(mapStateToProps)(RentForm)
+const mapDispatchToProps = dispatch => ({
+  rent: (id) => dispatch(attemptRent(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RentForm)

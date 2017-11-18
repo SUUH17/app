@@ -32,7 +32,7 @@ const RentModal = ({ dismiss }) =>
     </div>
   </div>
 
-const ItemModal = ({ data, dismiss, openRent }) =>
+const ItemModal = ({ data, dismiss, openRent, ownId }) =>
   <div className={style.flexContainer}>
     <div className={style.modalHeader}>
       <ArrowLeft onClick={dismiss} />
@@ -51,12 +51,12 @@ const ItemModal = ({ data, dismiss, openRent }) =>
           <span className={style.price}>{data.price + ' €/h'}</span>
         </div>
         <ItemInfo id={data.id} />
-        <button
+        { (data.ownerId != ownId) ? <button
           className={style.superRentButton}
           onClick={() => openRent(data.id)}
         >
           Rent
-      </button>
+      </button> : <span className={style.yourInfo}>Rented by you</span> }
       </div>
     </div>) : (
         <div className={style.loading}>
@@ -66,7 +66,8 @@ const ItemModal = ({ data, dismiss, openRent }) =>
   </div>
 
 const mapItemStateToProps = (state, props) => ({
-  data: selectItem(state, props)
+  data: selectItem(state, props),
+  ownId: state.user.ownerId
 })
 
 const mapItemDispatchToProps = dispatch => ({
