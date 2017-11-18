@@ -13,7 +13,14 @@ const Item = ({ data, openItem }) =>
     className={styles.item}
     onClick={() => openItem(data._id)}
   >
-    <h4>{data.name}</h4>
+    <div className={styles.imageContainer}>
+      <img className={styles.image} src={API_BASE + `images/${data.imageId}`} />
+    </div>
+    <div className={styles.infoContainer}>
+      <h4>{data.name}</h4>
+      <span className={styles.price}>{data.price + ' €/h'}</span>
+      <div>{data.location}</div>
+    </div>
   </div>
 
 const List = ({ searchString, filteredItems, openItem }) =>

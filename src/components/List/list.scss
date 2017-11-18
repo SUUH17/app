@@ -2,13 +2,22 @@
 
 .item {
   @extend .card;
+  overflow: hidden;
+  padding: 0;
   min-width: 10em;
   min-height: 10em;
+  display: flex;
+  flex-direction: column;
 
   h4 {
+    font-family: 'Raleway', sans-serif;
     margin-top: 0;
-    font-weight: 400;
+    margin-bottom: .1em;
+    font-weight: 600;
+    color: black;
   }
+
+  color: rgb(120, 120, 120);
 
   cursor: pointer;
   transition: all .2s;
@@ -23,6 +32,30 @@
   @media (max-width: 767px) {
     margin: .1em .2em;
   }
+}
+
+.imageContainer {
+  height: 7em;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.infoContainer {
+  position: relative;
+  flex: 1;
+  margin: .4em;
+}
+
+.price {
+  font-family: 'Titillium Web';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: .1em;
 }
 
 .list {
