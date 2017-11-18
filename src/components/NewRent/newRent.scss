@@ -23,6 +23,10 @@
   @extend .roundedButton;
 }
 
+.greenButton {
+  background: #4CAF50;
+}
+
 .cancelButton {
   @extend .roundedButton;
   background: transparent;

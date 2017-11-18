@@ -74,25 +74,32 @@ export const search = (state = { searchString: '' }, action) => {
   }
 }
 
-export const api = (state = { items: [], loading: false, error: false }, action) => {
+export const api = (state = { 
+    items: [],
+    apiLoading: false,
+    apiError: false,
+    uploading: false,
+    uploadError: false,
+    uploadSuccess: false
+  }, action) => {
   switch (action.type) {
     case 'GET_ITEM_START':
       return {
         ...state,
-        loading: true,
-        error: false
+        apiLoading: true,
+        apiError: false
       }
     case 'GET_ITEM_SUCCESS':
       return {
         ...state,
-        loading: false,
-        error: false
+        apiLoading: false,
+        apiError: false
       }
     case 'GET_ITEM_FAILED':
       return {
         ...state,
-        loading: false,
-        error: true
+        apiLoading: false,
+        apiError: true
       }
     case 'ADD_ITEM':
       return {
@@ -106,6 +113,27 @@ export const api = (state = { items: [], loading: false, error: false }, action)
       return {
         ...state,
         items: action.value.items
+      }
+    case 'RENTAL_UPLOAD_START':
+      return {
+        ...state,
+        uploading: true,
+        uploadError: false,
+        uploadSuccess: false
+      }
+    case 'RENTAL_UPLOAD_SUCCESS':
+      return {
+        ...state,
+        uploading: false,
+        uploadError: false,
+        uploadSuccess: true
+      }
+    case 'RENTAL_UPLOAD_FAILED':
+      return {
+        ...state,
+        uploading: false,
+        uploadError: true,
+        uploadSuccess: false
       }
     default:
       return state

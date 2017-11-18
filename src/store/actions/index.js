@@ -108,9 +108,9 @@ export function uploadImage (file) {
     })
       .then(res => res.json())
       .then(json => {
-        if (json._id) {
+        if (json.id) {
           dispatch(successImageUpload)
-          return json._id
+          return json.id
         }
         return null
       })

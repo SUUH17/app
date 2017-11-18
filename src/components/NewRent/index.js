@@ -72,7 +72,7 @@ class NewRent extends React.Component {
   }
   render () {
     const { name, location, price, collateral } = this.state
-    const { loggedIn } = this.props
+    const { loggedIn, uploading, uploadError, uploadSuccess } = this.props
     return (
       <div className={styles.container}>
         {!loggedIn
@@ -118,14 +118,19 @@ class NewRent extends React.Component {
                 </button>
 
                   <button
-                    className={styles.button}
+                    className={styles.button + ((uploadSuccess) ? ' ' + styles.greenButton : '')}
                     onClick={this.submitForm}
-                    disabled={!this.canSubmit}
+                  disabled={!this.canSubmit}
                   >
-                    Create
-                </button>
-                </div>
+                    {uploading 
+                      ? 'Uploading'
+                      :  uploadSuccess
+                        ? 'Success'
+                        : 'Create'
+                    }
+                  </button>
               </div>
+            </div>
             </div>
           )}
       </div>
@@ -134,7 +139,10 @@ class NewRent extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.user.loggedIn
+  loggedIn: state.user.loggedIn,
+  uploading: state.api.uploading,
+  uploadError: state.api.uploadError,
+  uploadSuccess: state.api.uploadSuccess
 })
 
 const mapDispatchToProps = dispatch => ({

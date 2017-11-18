@@ -11,7 +11,7 @@ import styles from './list.scss'
 const Item = ({ data, openItem }) =>
   <div
     className={styles.item}
-    onClick={() => openItem(data._id)}
+    onClick={() => openItem(data.id)}
   >
     <div className={styles.imageContainer}>
       <img className={styles.image} src={API_BASE + `images/${data.imageId}`} />
@@ -28,7 +28,7 @@ const List = ({ searchString, filteredItems, openItem }) =>
     <Search className={styles.listSearch} />
     <div className={styles.list}>
       {(filteredItems ||  []).map(item => 
-        <Item key={item._id} data={item} openItem={openItem} />)}
+        <Item key={item.id} data={item} openItem={openItem} />)}
     </div>
   </div>
 

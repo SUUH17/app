@@ -14,7 +14,7 @@ const LoginModal = ({ dismiss }) =>
     <div className={style.modalHeader}>
       <ArrowLeft onClick={dismiss} />
     </div>
-    <div className={style.modalContent}>
+    <div className={style.loginContent}>
       <Login />
     </div>
   </div>
@@ -24,7 +24,7 @@ const ItemModal = ({ data, dismiss }) =>
     <div className={style.modalHeader}>
       <ArrowLeft onClick={dismiss} />
     </div>
-    { data._id ? (<div className={style.modalContent}>
+    { data.id ? (<div className={style.modalContent}>
       <div
         className={style.imageContainer}
         style={{
