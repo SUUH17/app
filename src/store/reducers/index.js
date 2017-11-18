@@ -32,7 +32,7 @@ export const modal = (state = { visible: false }, action) => {
   }
 }
 
-export const search = (state = { searchString: 'moi' }, action) => {
+export const search = (state = { searchString: '' }, action) => {
   switch (action.type) {
     case 'SET_SEARCH':
       return {

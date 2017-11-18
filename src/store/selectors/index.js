@@ -8,7 +8,6 @@ export const getFilteredItems = createSelector(
   [getSearchString, getItems],
   (searchString, items) =>
     items.filter(item => {
-      console.log(searchString, item)
       return !searchString || item.name.toLowerCase().indexOf(searchString.toLowerCase()) >= 0
     })
 )

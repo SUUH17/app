@@ -25,7 +25,7 @@ const List = ({searchString, filteredItems}) =>
   <div>
     <Search className={styles.listSearch} />
     <div className={styles.list}>
-      { (filteredItems || []).map(item => <Item data={item} />) }
+      { (filteredItems || []).map(item => <Item key={item.id} data={item} />) }
     </div>
   </div>
 
