@@ -14,5 +14,11 @@
   margin-left: -2.2em;
   width: 1.4em;
   height: 1.4em;
+  color: #aaa;
   transition: opacity .2s;
+
+  @media (min-width: 768px) {
+    transform: scale(0.8);
+    margin-left: -1.8em;
+  }
 }
