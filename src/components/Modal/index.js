@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ArrowLeft } from 'react-feather'
+import { ArrowLeft, Loader } from 'react-feather'
 import classNames from 'classnames'
 
 import Login from './../Login'
 import { dismissModal } from '../../store/actions'
-import {  selectItem } from '../../store/selectors'
+import { selectItem } from '../../store/selectors'
 
 import style from './modal.scss'
 
@@ -20,11 +20,11 @@ const LoginModal = ({ dismiss }) =>
   </div>
 
 const ItemModal = ({ data, dismiss }) =>
-  <div>
+  <div className={style.flexContainer}>
     <div className={style.modalHeader}>
       <ArrowLeft onClick={dismiss} />
     </div>
-    <div className={style.modalContent}>
+    { data._id ? (<div className={style.modalContent}>
       <div
         className={style.imageContainer}
         style={{
@@ -39,7 +39,11 @@ const ItemModal = ({ data, dismiss }) =>
         </div>
         <span>{data.location}</span>
       </div>
-    </div>
+    </div>) : (
+      <div className={style.loading}>
+        <Loader className={style.spinner} size={60} />
+      </div>
+    ) }
   </div>
 
 const mapItemStateToProps = (state, props) => ({
