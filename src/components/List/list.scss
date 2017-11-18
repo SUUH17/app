@@ -11,6 +11,7 @@
 
   h4 {
     font-family: 'Raleway', sans-serif;
+    white-space: nowrap;
     margin-top: 0;
     margin-bottom: .1em;
     font-weight: 600;
@@ -60,7 +61,7 @@
 .infoContainer {
   position: relative;
   flex: 1;
-  margin: .2em .4em;
+  margin: .2em .4em;  
 }
 
 .price {
