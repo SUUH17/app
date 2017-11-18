@@ -24,7 +24,7 @@ var plugins = [
       'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     },
     version: JSON.stringify(pkg.version),
-    apiBase: JSON.stringify(process.env.API_BASE)
+    API_BASE: JSON.stringify(process.env.API_BASE)
   }),
   new webpack.LoaderOptionsPlugin({
     options: {
