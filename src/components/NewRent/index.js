@@ -1,15 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Field from './../Field'
+
 import { uploadRental } from './../../store/actions'
 
 import styles from './newRent.scss'
-
-const Field = ({ field, label, type, handler, state }) =>
-  <div className={styles.formField}>
-    <span>{label}</span>
-    <input type={type} onChange={handler(field)} value={state} />
-  </div>
 
 class NewRent extends React.Component {
   constructor() {

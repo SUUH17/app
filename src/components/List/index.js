@@ -14,7 +14,14 @@ const Item = ({ data, openItem }) =>
     onClick={() => openItem(data.id)}
   >
     <div className={styles.imageContainer}>
-      <img className={styles.image} src={API_BASE + `images/${data.imageId}`} />
+      <img 
+        className={styles.image} 
+        src={API_BASE + `images/${data.imageId}`}
+        style={{
+          filter: 'blur(10px)'
+        }}
+      />
+      {data.available && <span>RENTED</span>}
     </div>
     <div className={styles.infoContainer}>
       <h4>{data.name}</h4>

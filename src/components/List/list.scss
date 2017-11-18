@@ -37,6 +37,19 @@
 .imageContainer {
   height: 7em;
   overflow: hidden;
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 1em;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 2em;
+    color: #eee;
+    background: rgba(47, 47, 47, 0.639);
+    font-family: 'Titillium Web';
+  }
 }
 
 .image {

@@ -4,6 +4,7 @@ import { ArrowLeft, Loader } from 'react-feather'
 import classNames from 'classnames'
 
 import Login from './../Login'
+import RentForm from './../RentForm'
 import { dismissModal } from '../../store/actions'
 import { selectItem } from '../../store/selectors'
 
@@ -25,6 +26,7 @@ const RentModal = ({ dismiss }) =>
       <ArrowLeft onClick={dismiss} />
     </div>
     <div className={style.modalContent}>
+      <RentForm />
     </div>
   </div>
 
