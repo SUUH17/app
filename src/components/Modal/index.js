@@ -19,12 +19,21 @@ const LoginModal = ({ dismiss }) =>
     </div>
   </div>
 
-const ItemModal = ({ data, dismiss }) =>
+const RentModal = ({ dismiss }) =>
   <div className={style.flexContainer}>
     <div className={style.modalHeader}>
       <ArrowLeft onClick={dismiss} />
     </div>
-    { data.id ? (<div className={style.modalContent}>
+    <div className={style.modalContent}>
+    </div>
+  </div>
+
+const ItemModal = ({ data, dismiss, openRent }) =>
+  <div className={style.flexContainer}>
+    <div className={style.modalHeader}>
+      <ArrowLeft onClick={dismiss} />
+    </div>
+    {data.id ? (<div className={style.modalContent}>
       <div
         className={style.imageContainer}
         style={{
@@ -38,19 +47,29 @@ const ItemModal = ({ data, dismiss }) =>
           <span className={style.price}>{data.price + ' €/h'}</span>
         </div>
         <span>{data.location}</span>
+        <button
+          className={style.superRentButton}
+          onClick={() => openRent(data.id)}
+        >
+          Rent
+      </button>
       </div>
     </div>) : (
-      <div className={style.loading}>
-        <Loader className={style.spinner} size={60} />
-      </div>
-    ) }
+        <div className={style.loading}>
+          <Loader className={style.spinner} size={60} />
+        </div>
+      )}
   </div>
 
 const mapItemStateToProps = (state, props) => ({
   data: selectItem(state, props)
 })
 
-const RentalItemModal = connect(mapItemStateToProps)(ItemModal)
+const mapItemDispatchToProps = dispatch => ({
+  openRent: (itemId) => dispatch({ type: 'SHOW_RENT_FORM', payload: { itemId } })
+})
+
+const RentalItemModal = connect(mapItemStateToProps, mapItemDispatchToProps)(ItemModal)
 
 const ModalContainer = ({ visible, itemId, dismiss, location }) =>
   visible
@@ -64,6 +83,9 @@ const ModalContainer = ({ visible, itemId, dismiss, location }) =>
           <LoginModal dismiss={dismiss} />}
         {location === 'SHOW_RENT_MODAL' &&
           <RentalItemModal dismiss={dismiss} id={itemId} />}
+        {location === 'SHOW_RENT_FORM' && 
+          <RentModal dismiss={dismiss} />
+        }
       </div>
     </div>
     : null

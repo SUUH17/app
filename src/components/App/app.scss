@@ -10,6 +10,7 @@
   padding: .4em;
   border-bottom: 1px solid $lightgrey;
   justify-content: space-between;
+  z-index: 1;
 
   @media (max-width: 767px) {
     top: initial;
