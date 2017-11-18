@@ -164,6 +164,10 @@ export function uploadRental (data, file) {
             .then(json => {
               dispatch(successRentalUpload)
               dispatch(getItems())
+              setTimeout(() => {
+                dispatch({ type: 'SHOW_RENT' }, 1000)
+                window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight)
+              })
             })
             .catch(dispatch(failedRentalUpload))
         }
