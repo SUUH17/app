@@ -43,10 +43,6 @@ export function getItems () {
   return dispatch =>
     fetch(API_BASE + 'items/')
       .then(res => res.json())
-      .then(json => {
-        console.log(json)
-        return json
-      })
       .then(json =>
         dispatch(addItems(json))
       )

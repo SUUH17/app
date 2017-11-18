@@ -42,8 +42,8 @@ const rootReducer = combineReducers({
 const middlewares = applyMiddleware(routeMiddleware, thunk)
 
 const enhancers = compose(
-  middlewares,
   routeEnhancer,
+  middlewares,
   window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
 )
 
