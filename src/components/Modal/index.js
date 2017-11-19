@@ -5,7 +5,7 @@ import classNames from 'classnames'
 
 import Login from './../Login'
 import RentForm from './../RentForm'
-import { dismissModal } from '../../store/actions'
+import { dismissModal, attemptReturn } from '../../store/actions'
 import { selectItem } from '../../store/selectors'
 
 import ItemInfo from './../ItemInfo'
@@ -32,7 +32,7 @@ const RentModal = ({ dismiss }) =>
     </div>
   </div>
 
-const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin }) =>
+const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, returnItem }) =>
   <div className={style.flexContainer}>
     <div className={style.modalHeader}>
       <ArrowLeft onClick={dismiss} />
@@ -63,10 +63,18 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin }) =>
                 }
               }}
             >
-            Rent with eRent
+              Rent with eRent
             </button>
           </span>
-          : <span className={style.yourInfo}>Offered by you</span>
+          : <span className={style.yourInfo}>
+            Offered by you. { '  ' }
+              <button 
+                className={style.superRentButton}
+                onClick={() => returnItem(data.id)}
+              >
+              Return
+            </button>
+          </span>
         }
       </div>
     </div>) : (
@@ -85,7 +93,8 @@ const mapItemStateToProps = (state, props) => ({
 const mapItemDispatchToProps = dispatch => ({
   openRent: (itemId) => dispatch({ type: 'SHOW_RENT_FORM', payload: { itemId } }),
   goToLogin: (onSuccessAction) =>
-    dispatch({ type: 'SHOW_LOGIN', payload: onSuccessAction })
+    dispatch({ type: 'SHOW_LOGIN', payload: onSuccessAction }),
+  returnItem: (itemId) => dispatch(attemptReturn(itemId))
 })
 
 const RentalItemModal = connect(mapItemStateToProps, mapItemDispatchToProps)(ItemModal)

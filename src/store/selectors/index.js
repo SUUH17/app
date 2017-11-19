@@ -6,7 +6,6 @@ const getSearchString = state => state.search.searchString
 const getItems = state => state.api.items
 
 const getItemById = (state, props) => {
-  console.log(state, props)
   const items = state.api.items
   const filtered = items.filter(it =>
     it.id === props.id

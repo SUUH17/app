@@ -272,7 +272,35 @@ export function attemptRent (id) {
           setTimeout(() => {
             dispatch(successRentAttempt)
             setTimeout(() => {
-              dispatch({type: 'SHOW_RENT'})
+              dispatch({ type: 'SHOW_RENT' })
+            }, 1000)
+            dispatch(getItems())
+          }, 2000)
+        } else {
+          dispatch(failedRentAttempt)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        dispatch(failedRentAttempt)
+      })
+  }
+}
+
+export function attemptReturn (id) {
+  return dispatch => {
+    dispatch(startRentAttempt)
+    return fetch(API_BASE + `loans/return/${id}`, {
+      method: 'POST',
+      credentials: 'include'
+    })
+      .then(res => res.status === 200)
+      .then(yes => {
+        if (yes) {
+          setTimeout(() => {
+            dispatch(successRentAttempt)
+            setTimeout(() => {
+              dispatch({ type: 'SHOW_MY_OFFERS' })
             }, 1000)
             dispatch(getItems())
           }, 2000)

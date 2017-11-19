@@ -125,6 +125,7 @@ export const api = (state = {
         items: action.value.items
       }
     case 'SHOW_RENT':
+    case 'SHOW_MY_OFFERS':
       return {
         ...state,
         uploading: false,
