@@ -53,7 +53,7 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  prev: state.location.prev
+  prev: state.location.payload
 })
 
 const mapDispatchToProps = (dispatch, props) => ({

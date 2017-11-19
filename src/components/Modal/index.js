@@ -53,18 +53,18 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin }) =>
         <ItemInfo id={data.id} />
         {(data.ownerId != ownId)
           ? <span className={style.rentOptions}>
-            { loggedIn ? 'Rent using eRent: ' : 'Login to eRent: ' }
-              <button
+            {loggedIn ? 'Rent using eRent: ' : 'Login to eRent: '}
+            <button
               className={style.superRentButton}
               onClick={() => {
-                if (!loggedIn) {
-                  goToLogin()
+                if (loggedIn) {
+                  goToLogin({ type: 'SHOW_RENT_FORM', payload: { itemId: data.id } })
                 } else {
                   openRent(data.id)
                 }
               }}
             >
-            { loggedIn ? 'Rent' : 'Login' }
+              {loggedIn ? 'Rent' : 'Login'}
             </button>
           </span>
           : <span className={style.yourInfo}>Offered by you</span>
@@ -85,7 +85,8 @@ const mapItemStateToProps = (state, props) => ({
 
 const mapItemDispatchToProps = dispatch => ({
   openRent: (itemId) => dispatch({ type: 'SHOW_RENT_FORM', payload: { itemId } }),
-  goToLogin: () => dispatch({type: 'SHOW_LOGIN'})
+  goToLogin: (onSuccessAction) =>
+    dispatch({ type: 'SHOW_LOGIN', payload: onSuccessAction })
 })
 
 const RentalItemModal = connect(mapItemStateToProps, mapItemDispatchToProps)(ItemModal)
