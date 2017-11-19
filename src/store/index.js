@@ -12,14 +12,15 @@ const history = createHistory()
 const routesMap = {
   HOME: '/',
   SHOW_LOGIN: '/login',
-  SHOW_RENT_MODAL: '/rent/:itemId',
-  SHOW_RENT: {
+  SHOW_RENT: '/rent/:itemId',
+  SHOW_RENTS: {
     path: '/rent',
     thunk: getItems()
   },
   SHOW_RENT_FORM: '/rent_item/:itemId',
   NEW_RENTAL: '/new_rent',
   SHOW_MAP: '/map',
+  SHOW_MY_OFFER: '/my_offers/:itemId',
   SHOW_MY_OFFERS: {
     path: '/my_offers',
     thunk: getItems()

@@ -31,7 +31,7 @@ const Header = ({ page }) =>
       <Logo />
       <NavLink
         activeClassName={style.activeLink}
-        className={style.link} to={{ type: 'SHOW_RENT' }}>
+        className={style.link} to={{ type: 'SHOW_RENTS' }}>
         <Box />
         Rents
       </NavLink>
@@ -42,7 +42,7 @@ const Header = ({ page }) =>
         Rented
     </NavLink>
     </div>
-    {(page.indexOf('SHOW_RENT') >= 0 || page === 'SHOW_MY_OFFERS') && <Search className={style.navSearch} />}
+    {(page.indexOf('SHOW_RENTS') >= 0 || page === 'SHOW_MY_OFFERS') && <Search className={style.navSearch} />}
   </div>
 
 const HomeView = () =>
@@ -56,9 +56,10 @@ const getView = (page, ownerId) => {
       return <HomeView />
     case 'SHOW_MAP':
       return <Map />
+    case 'SHOW_RENTS':
     case 'SHOW_RENT':
-    case 'SHOW_RENT_MODAL':
       return <List />
+    case 'SHOW_MY_OFFER':
     case 'SHOW_MY_OFFERS':
       return <List filter={{ownerId, available: 0}} />
     case 'NEW_RENTAL':

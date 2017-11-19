@@ -8,10 +8,10 @@ export const toHome = {
   type: 'HOME'
 }
 
-export function dismissModal (action = toHome) {
+export function dismissModal (paramAction = toHome) {
   return dispatch => {
     dispatch(closeModal)
-    dispatch(action)
+    dispatch(paramAction)
   }
 }
 
@@ -165,7 +165,7 @@ export function uploadRental (data, file) {
               dispatch(successRentalUpload)
               dispatch(getItems())
               setTimeout(() => {
-                dispatch({ type: 'SHOW_RENT' }, 1000)
+                dispatch({ type: 'SHOW_RENTS' }, 1000)
                 window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight)
               })
             })
@@ -272,7 +272,7 @@ export function attemptRent (id) {
           setTimeout(() => {
             dispatch(successRentAttempt)
             setTimeout(() => {
-              dispatch({ type: 'SHOW_RENT' })
+              dispatch({ type: 'SHOW_RENTS' })
             }, 1000)
             dispatch(getItems())
           }, 2000)

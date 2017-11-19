@@ -46,14 +46,15 @@ export const user = (state = { ownerId: '', loggedIn: false, error: false }, act
 
 export const modal = (state = { visible: false }, action) => {
   switch (action.type) {
-    case 'SHOW_RENT_MODAL':
+    case 'SHOW_RENT':
     case 'SHOW_LOGIN':
     case 'SHOW_RENT_FORM':
+    case 'SHOW_MY_OFFER':
       return {
         ...state,
         visible: true
       }
-    case 'SHOW_RENT':
+    case 'SHOW_RENTS':
     case 'SHOW_MY_OFFERS':
     case 'CLOSE_MODAL':
       return {
@@ -125,7 +126,7 @@ export const api = (state = {
         ...state,
         items: action.value.items
       }
-    case 'SHOW_RENT':
+    case 'SHOW_RENTS':
     case 'SHOW_MY_OFFERS':
       return {
         ...state,

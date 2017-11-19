@@ -29,7 +29,7 @@ class Login extends React.Component {
     const { type, payload } = this.props.prev
     if (!!username && !!password) {
       this.props.postLogin(username, password)
-        .then(() => this.props.goBack(type, payload))
+        .then(() => this.props.goBack(type || 'SHOW_RENTS', payload))
     }
   }
   render () {

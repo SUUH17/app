@@ -12,30 +12,30 @@ import ItemInfo from './../ItemInfo'
 
 import style from './modal.scss'
 
-const LoginModal = ({ dismiss }) =>
+const LoginModal = ({ dismiss, prev }) =>
   <div>
     <div className={style.modalHeader}>
-      <ArrowLeft onClick={dismiss} />
+      <ArrowLeft onClick={() => dismiss(prev)} />
     </div>
     <div className={style.loginContent}>
       <Login />
     </div>
   </div>
 
-const RentModal = ({ dismiss }) =>
+const RentModal = ({ dismiss, prev }) =>
   <div className={style.flexContainer}>
     <div className={style.modalHeader}>
-      <ArrowLeft onClick={dismiss} />
+      <ArrowLeft onClick={() => dismiss(prev)} />
     </div>
     <div className={style.modalContent}>
       <RentForm />
     </div>
   </div>
 
-const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, returnItem }) =>
+const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, returnItem, prev }) =>
   <div className={style.flexContainer}>
     <div className={style.modalHeader}>
-      <ArrowLeft onClick={dismiss} />
+      <ArrowLeft onClick={() => dismiss(prev)} />
     </div>
     {data.id ? (<div className={style.modalContent}>
       <div
@@ -99,20 +99,22 @@ const mapItemDispatchToProps = dispatch => ({
 
 const RentalItemModal = connect(mapItemStateToProps, mapItemDispatchToProps)(ItemModal)
 
-const ModalContainer = ({ visible, itemId, dismiss, location }) =>
+const ModalContainer = ({ visible, itemId, dismiss, location, prev }) =>
   visible
     ? <div className={style.modalContainer}>
       <div
         className={style.backdrop}
-        onClick={dismiss}
+        onClick={() => dismiss(prev)}
       ></div>
       <div className={style.modal}>
         {location === 'SHOW_LOGIN' &&
-          <LoginModal dismiss={dismiss} />}
-        {location === 'SHOW_RENT_MODAL' &&
-          <RentalItemModal dismiss={dismiss} id={itemId} />}
+          <LoginModal dismiss={dismiss} prev={prev} />}
+        {location === 'SHOW_RENT' &&
+          <RentalItemModal dismiss={dismiss} id={itemId}  prev={prev} />}
+        {location === 'SHOW_MY_OFFER' &&
+          <RentalItemModal dismiss={dismiss} id={itemId}  prev={prev} />}
         {location === 'SHOW_RENT_FORM' &&
-          <RentModal dismiss={dismiss} />
+          <RentModal dismiss={dismiss} prev={prev} />
         }
       </div>
     </div>
@@ -121,11 +123,15 @@ const ModalContainer = ({ visible, itemId, dismiss, location }) =>
 const mapStateToProps = state => ({
   visible: state.modal.visible,
   itemId: state.location.payload.itemId,
-  location: state.location.type
+  location: state.location.type,
+  prev: state.location.prev
 })
 
 const mapDispatchToProps = dispatch => ({
-  dismiss: () => dispatch(dismissModal({ type: 'SHOW_RENT' }))
+  dismiss: ({type, payload}) => {
+    console.log(type, payload)
+    dispatch(dismissModal({type, payload}))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalContainer)

@@ -9,10 +9,19 @@ import Search from './../Search'
 
 import styles from './list.scss'
 
-const Item = ({ data, openItem }) =>
+const Item = ({ data, openItem, prev }) =>
   <div
     className={styles.item}
-    onClick={() => openItem(data.id)}
+    onClick={() => {
+      console.log(prev)
+      let type = 'SHOW_RENTS'
+      if (prev.type === 'SHOW_RENTS') {
+        type = 'SHOW_RENT'
+      } else if (prev.type === 'SHOW_MY_OFFERS') {
+        type = 'SHOW_MY_OFFER'
+      }
+      openItem(data.id, type)
+    }}
   >
     <div className={styles.imageContainer}>
       <img 
@@ -31,7 +40,7 @@ const Item = ({ data, openItem }) =>
     </div>
   </div>
 
-const List = ({ searchString, filteredItems, openItem, setFilter, filter }) =>
+const List = ({ searchString, filteredItems, openItem, setFilter, filter, ownId, prev }) =>
   <div>
     <Search className={styles.listSearch} />
     { false && <div className={styles.setFilter}>
@@ -47,18 +56,19 @@ const List = ({ searchString, filteredItems, openItem, setFilter, filter }) =>
           return (item.ownerId == filter.ownerId && item.available == filter.available)
         })
         .map(item => 
-        <Item key={item.id} data={item} openItem={openItem} />)}
+        <Item key={item.id} ownId={ownId} data={item} openItem={openItem} prev={prev} />)}
     </div>
   </div>
 
 const mapStateToProps = state => ({
   searchString: state.search.searchString,
-  filteredItems: getFilteredItems(state)
+  filteredItems: getFilteredItems(state),
+  prev: state.location
 })
 
 const mapDispatchToProps = dispatch => ({
-  openItem: id => dispatch({
-    type: 'SHOW_RENT_MODAL',
+  openItem: (id, type) => dispatch({
+    type,
     payload: {
       itemId: id
     }
