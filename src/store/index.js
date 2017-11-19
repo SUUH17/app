@@ -12,7 +12,10 @@ const history = createHistory()
 const routesMap = {
   HOME: '/',
   SHOW_LOGIN: '/login',
-  SHOW_RENT: '/rent/:itemId',
+  SHOW_RENT: {
+    path: '/rent/:itemId',
+    thunk: getItems()
+  },
   SHOW_RENTS: {
     path: '/rent',
     thunk: getItems()
@@ -20,7 +23,10 @@ const routesMap = {
   SHOW_RENT_FORM: '/rent_item/:itemId',
   NEW_RENTAL: '/new_rent',
   SHOW_MAP: '/map',
-  SHOW_MY_OFFER: '/my_offers/:itemId',
+  SHOW_MY_OFFER: {
+    path: '/my_offers/:itemId',
+    thunk: getItems()
+  },
   SHOW_MY_OFFERS: {
     path: '/my_offers',
     thunk: getItems()

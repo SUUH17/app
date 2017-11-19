@@ -11,7 +11,11 @@ export const toHome = {
 export function dismissModal (paramAction = toHome) {
   return dispatch => {
     dispatch(closeModal)
-    dispatch(paramAction)
+    if (!paramAction.type) {
+      dispatch({type: 'SHOW_RENTS'})
+    } else {
+      dispatch(paramAction)
+    }
   }
 }
 
