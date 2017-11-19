@@ -19,7 +19,7 @@ const Logo = () =>
     CameraRent
   </div>
 
-const Header = ({ page }) =>
+const Header = ({ page, userId }) =>
   <div className={style.header}>
     <div className={style.nav}>
       { false && <NavLink
@@ -36,12 +36,12 @@ const Header = ({ page }) =>
         <Box />
         Rents
       </NavLink>
-      <NavLink
+      { userId && <NavLink
         activeClassName={style.activeLink}
         className={style.link} to={{ type: 'SHOW_MY_OFFERS' }}>
         <Activity />
         Rented
-      </NavLink>
+      </NavLink> }
       <NavLink
         activeClassName={style.activeLink}
         exact
@@ -75,7 +75,7 @@ const getView = (page, ownerId) => {
 const App = ({ page, cookieToRedux, ownId}) => {
   cookieToRedux(document.cookie)
   return <div>
-    <Header page={page} />
+    <Header page={page} userId={ownId} />
     <div className={style.content}>
       {getView(page, ownId)}
     </div>

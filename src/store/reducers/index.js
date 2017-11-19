@@ -32,6 +32,7 @@ export const user = (state = { ownerId: '', loggedIn: false, error: false, users
         error: false
       }
     case 'LOGIN_FAILED':
+    case 'LOGGED_OUT':
     case 'NOT_LOGGED_IN':
       return {
         ...state,

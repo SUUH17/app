@@ -23,7 +23,7 @@ const ProfileView = ({ userId, users, logout, login }) =>
         {userId ? `Logged in as ${getUserNameById(users, userId)}` : 'Please log in using your cRent credentials'}
       </label>
     </div>
-    {userId && <button className={style.cancelButton} onClick={logout}>Logout</button>}
+    {userId && <button className={style.cancelButton} onClick={() => logout()}>Logout</button>}
     {!userId && <button className={style.button} onClick={() => login({type: 'HOME'})}>Login</button>}
 
   </div>
@@ -34,7 +34,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logoutAction),
+  logout: () => dispatch(logoutAction()),
   login: (onSuccessAction) => dispatch({ type: 'SHOW_LOGIN', payload: onSuccessAction })
 })
 

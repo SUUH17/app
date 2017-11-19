@@ -213,6 +213,7 @@ export function login (username, password) {
 }
 
 export function logout () {
+  console.log('logout')
   return dispatch => {
     console.log('logging out')
     return fetch(API_BASE + 'auth/logout', {
@@ -235,6 +236,8 @@ export function checkLogin () {
           ownerId
         }
       }))
+    } else {
+      dispatch({type: 'LOGGED_OUT'})
     }
     return Promise.resolve()
   }
