@@ -39,12 +39,12 @@ class RentForm extends React.Component {
           <ItemInfo id={itemId} />
 
           <div className={style.acceptance}>
-            <label>I accept the terms.</label>
             <input
               type="checkbox"
               checked={this.state.checked}
               onChange={this.onChecked}
             />
+            <label>I accept the terms of this agreement.</label>
           </div>
 
         </div>

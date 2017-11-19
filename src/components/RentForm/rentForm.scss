@@ -70,11 +70,25 @@
 
 .acceptance {
   @extend .field;
+  font-size: 1.2em;
 
   label {
     margin-bottom: .2em;
     font-weight: 600;
   }
 
+  @media (max-width: 767px) {
+    font-size: 0.9em;
+  }
+
+  input {
+    margin-right: .6em;
+    width: 1.2em;
+    height: 1.2em;
+  }
+
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
