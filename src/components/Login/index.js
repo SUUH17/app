@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { login } from './../../store/actions'
+import { login, closeModal } from './../../store/actions'
 
 import styles from './login.scss'
 
@@ -31,6 +31,7 @@ class Login extends React.Component {
       this.props.postLogin(username, password)
         .then(res => {
           if (res.type === 'LOGIN_SUCCESS') {
+            this.props.closeModal()
             this.props.goBack(type || 'SHOW_RENTS', payload)
           }
         })
@@ -64,7 +65,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   postLogin: (username, password) => dispatch(login(username, password)),
-  goBack: (type, payload) => dispatch({ type, payload })
+  goBack: (type, payload) => dispatch({ type, payload }),
+  closeModal: () => dispatch(closeModal)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

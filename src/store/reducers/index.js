@@ -66,7 +66,6 @@ export const modal = (state = { visible: false }, action) => {
         ...state,
         visible: true
       }
-    case 'LOGGED_IN':
     case 'SHOW_RENTS':
     case 'SHOW_MY_OFFERS':
     case 'CLOSE_MODAL':
