@@ -4,6 +4,12 @@
   @extend .field;
   border-bottom: 1px solid #dedede;
 
+  overflow-y: scroll;
+
+  @media (max-width: 767px) {
+    font-size: 0.8em;
+  }
+
   label {
     margin-bottom: .2em;
     font-weight: 600;

@@ -54,6 +54,7 @@ export const modal = (state = { visible: false }, action) => {
         visible: true
       }
     case 'SHOW_RENT':
+    case 'SHOW_MY_OFFERS':
     case 'CLOSE_MODAL':
       return {
         ...state,

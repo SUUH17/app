@@ -68,12 +68,12 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, return
           </span>
           : <span className={style.yourInfo}>
             Offered by you. { '  ' }
-              <button 
+              { !data.available && <button 
                 className={style.superRentButton}
                 onClick={() => returnItem(data.id)}
               >
               Return
-            </button>
+            </button> }
           </span>
         }
       </div>
