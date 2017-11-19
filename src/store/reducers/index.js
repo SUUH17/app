@@ -32,13 +32,19 @@ export const user = (state = { ownerId: '', loggedIn: false, error: false, users
         error: false
       }
     case 'LOGIN_FAILED':
+      return {
+        ...state,
+        ownerId: undefined,
+        loggedIn: false,
+        error: true
+      }
     case 'LOGGED_OUT':
     case 'NOT_LOGGED_IN':
       return {
         ...state,
         ownerId: undefined,
         loggedIn: false,
-        error: true
+        error: false
       }
     case 'SET_USERS':
       return {
@@ -60,6 +66,7 @@ export const modal = (state = { visible: false }, action) => {
         ...state,
         visible: true
       }
+    case 'LOGGED_IN':
     case 'SHOW_RENTS':
     case 'SHOW_MY_OFFERS':
     case 'CLOSE_MODAL':

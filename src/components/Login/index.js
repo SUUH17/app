@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import {  login } from './../../store/actions'
+import { login } from './../../store/actions'
 
 import styles from './login.scss'
 
@@ -26,18 +26,23 @@ class Login extends React.Component {
       })
   handleSubmit = () => {
     const { username, password } = this.state
-    const { type, payload } = this.props.prev
+    const { type, payload } = this.props.prev
     if (!!username && !!password) {
       this.props.postLogin(username, password)
-        .then(() => this.props.goBack(type || 'SHOW_RENTS', payload))
+        .then(res => {
+          if (res.type === 'LOGIN_SUCCESS') {
+            this.props.goBack(type || 'SHOW_RENTS', payload)
+          }
+        })
+        .catch(err => console.log(err))
     }
   }
   render () {
     return (
       <div className={styles.container}>
         <h2>Login</h2>
-        <span>Use your cRent credentials</span>
-        <div className={styles.loginForm}>
+        {this.props.error ? <span>Login failed. Invalid credentials</span> : <span>Use your cRent credentials</span>}
+        <div className={styles.loginForm + (this.props.error ? (' ' + styles.errorForm) : '')}>
           <Field field="username" type="text" handler={this.handleInput} label="Username" />
           <Field field="password" type="password" handler={this.handleInput} label="Password" />
           <button
@@ -53,7 +58,8 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  prev: state.location.payload
+  prev: state.location.payload,
+  error: state.user.error
 })
 
 const mapDispatchToProps = (dispatch, props) => ({

@@ -13,6 +13,12 @@
   @extend .form;
 }
 
+.errorForm {
+  input {
+    border-color: #ba4141;
+  }
+}
+
 .formField {
   @extend .field;
 }
