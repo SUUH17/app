@@ -52,34 +52,35 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, return
         </div>
         <ItemInfo id={data.id} />
         {
-          !!data.available
-            ? (data.ownerId != ownId)
-              ? <span className={style.rentOptions}>
-                  <button
-                    className={style.superRentButton}
-                    onClick={() => {
-                      if (!loggedIn) {
-                        goToLogin({ type: 'SHOW_RENT_FORM', payload: { itemId: data.id } })
-                      } else {
-                        openRent(data.id)
-                      }
-                    }}
-                  >
-                    Rent with cRent
-                  </button>
-                </span>
-              : (<span className={style.yourInfo}>
-                  Offered by you. { '  ' }
-                    { !data.available && 
-                      <button 
-                        className={style.superRentButton}
-                        onClick={() => returnItem(data.id)}
-                      >
-                      Return
-                  </button> }
-                </span>)
-           : <span className={style.yourInfo}>Not available</span>
-          }
+          (data.ownerId != ownId)
+            ? <span className={style.rentOptions}>
+              {!!data.available ?
+                <button
+                  className={style.superRentButton}
+                  onClick={() => {
+                    if (!loggedIn) {
+                      goToLogin({ type: 'SHOW_RENT_FORM', payload: { itemId: data.id } })
+                    } else {
+                      openRent(data.id)
+                    }
+                  }}
+                >
+                  Rent with cRent
+                </button> : <span className={style.yourInfo}>
+                  Not available
+                </span>}
+            </span>
+            : (<span className={style.yourInfo}>
+              Offered by you. {'  '}
+              {!data.available &&
+                <button
+                  className={style.superRentButton}
+                  onClick={() => returnItem(data.id)}
+                >
+                  Return
+                  </button>}
+            </span>)
+        }
       </div>
     </div>) : (
         <div className={style.loading}>
@@ -114,9 +115,9 @@ const ModalContainer = ({ visible, itemId, dismiss, location, prev }) =>
         {location === 'SHOW_LOGIN' &&
           <LoginModal dismiss={dismiss} prev={prev} />}
         {location === 'SHOW_RENT' &&
-          <RentalItemModal dismiss={dismiss} id={itemId}  prev={prev} />}
+          <RentalItemModal dismiss={dismiss} id={itemId} prev={prev} />}
         {location === 'SHOW_MY_OFFER' &&
-          <RentalItemModal dismiss={dismiss} id={itemId}  prev={prev} />}
+          <RentalItemModal dismiss={dismiss} id={itemId} prev={prev} />}
         {location === 'SHOW_RENT_FORM' &&
           <RentModal dismiss={dismiss} prev={prev} />
         }
@@ -132,11 +133,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  dismiss: ({type, payload}) => {
-    if (type === 'SHOW_LOGIN' || type === 'SHOW_RENT_FORM') {
-      dispatch(dismissModal({type: 'SHOW_RENTS', payload}))
+  dismiss: ({ type, payload }) => {
+    if (type === 'SHOW_LOGIN' || type === 'SHOW_RENT_FORM') {
+      dispatch(dismissModal({ type: 'SHOW_RENTS', payload }))
     }
-    dispatch(dismissModal({type, payload}))
+    dispatch(dismissModal({ type, payload }))
   }
 })
 
