@@ -51,31 +51,35 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, return
           <span className={style.price}>{data.price + ' €/h'}</span>
         </div>
         <ItemInfo id={data.id} />
-        {(data.ownerId != ownId)
-          ? <span className={style.rentOptions}>
-            <button
-              className={style.superRentButton}
-              onClick={() => {
-                if (!loggedIn) {
-                  goToLogin({ type: 'SHOW_RENT_FORM', payload: { itemId: data.id } })
-                } else {
-                  openRent(data.id)
-                }
-              }}
-            >
-              Rent with cRent
-            </button>
-          </span>
-          : <span className={style.yourInfo}>
-            Offered by you. { '  ' }
-              { !data.available && <button 
-                className={style.superRentButton}
-                onClick={() => returnItem(data.id)}
-              >
-              Return
-            </button> }
-          </span>
-        }
+        {
+          !!data.available
+            ? (data.ownerId != ownId)
+              ? <span className={style.rentOptions}>
+                  <button
+                    className={style.superRentButton}
+                    onClick={() => {
+                      if (!loggedIn) {
+                        goToLogin({ type: 'SHOW_RENT_FORM', payload: { itemId: data.id } })
+                      } else {
+                        openRent(data.id)
+                      }
+                    }}
+                  >
+                    Rent with cRent
+                  </button>
+                </span>
+              : (<span className={style.yourInfo}>
+                  Offered by you. { '  ' }
+                    { !data.available && 
+                      <button 
+                        className={style.superRentButton}
+                        onClick={() => returnItem(data.id)}
+                      >
+                      Return
+                  </button> }
+                </span>)
+           : <span className={style.yourInfo}>Not available</span>
+          }
       </div>
     </div>) : (
         <div className={style.loading}>
