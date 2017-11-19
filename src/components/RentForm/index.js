@@ -31,6 +31,11 @@ class RentForm extends React.Component {
   }
   render () {
     const { itemId, rent, renting, rentingSuccess, rentingFailed, loggedIn, ownId, users, item } = this.props
+
+    if (item.ownerId == ownId) {
+      this.props.showRents()
+    }
+
     const rentee = getUserNameById(users, item.ownerId)
     const renter = getUserNameById(users, ownId)
 
@@ -87,11 +92,12 @@ const mapStateToProps = state => ({
   renting: state.api.renting,
   loggedIn: state.user.loggedIn,
   rentingSuccess: state.api.rentingSuccess,
-  rentingFailed: state.api.rentingFailed,
+  rentingFailed: state.api.rentingFailed
 })
 
 const mapDispatchToProps = dispatch => ({
-  rent: (id) => dispatch(attemptRent(id))
+  rent: (id) => dispatch(attemptRent(id)),
+  showRents: () => dispatch({type: 'SHOW_RENTS'})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(RentForm)
