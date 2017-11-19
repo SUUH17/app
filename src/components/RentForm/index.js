@@ -13,16 +13,19 @@ class RentForm extends React.Component {
   constructor() {
     super()
     this.state = {
-
+      checked: false
     }
+  }
+  onChecked = (e) => {
+    this.setState({ checked: e.target.checked })
   }
   render () {
     const { itemId, rent, renting, rentingSuccess, rentingFailed, loggedIn } = this.props
     return (
       <div className={style.container}>
-        <h2>Rent</h2>
+        <h2>cRent</h2>
         <h3>
-          This Agreement is entered into between [ITEM OWNER] (“Owner”) and [RENTER] (“Renter”) (collectively the “Parties”) and outlines the respective rights and obligations of the Parties relating to the rental of the item.
+          This Agreement is entered into between [ITEM OWNER] (“Rentee”) and [RENTER] (“Renter”) (collectively the “Parties”) and outlines the respective rights and obligations of the Parties relating to the rental of the item.
         </h3>
         <div className={style.rentalForm}>
           <div className={style.formField}>
@@ -35,17 +38,27 @@ class RentForm extends React.Component {
 
           <ItemInfo id={itemId} />
 
+          <div className={style.acceptance}>
+            <label>I accept the terms.</label>
+            <input
+              type="checkbox"
+              checked={this.state.checked}
+              onChange={this.onChecked}
+            />
+          </div>
+
         </div>
         <div className={style.rentAction}>
           {renting && <Loader />}
           <button
             className={style.rentButton}
             onClick={() => rent(itemId)}
+            disabled={!this.state.checked}
           >
             {renting && 'Renting...'}
             {rentingSuccess && 'Success'}
             {rentingFailed && 'Renting failed'}
-            {(!renting && !rentingSuccess && !rentingFailed) && 'Accept & Rent'}
+            {(!renting && !rentingSuccess && !rentingFailed) && 'Rent'}
           </button>
         </div>
       </div>

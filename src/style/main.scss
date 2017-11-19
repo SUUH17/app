@@ -36,6 +36,11 @@ h3 {
   cursor: pointer;
   color: white;
   background: $accentcolor;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .highlighted {
