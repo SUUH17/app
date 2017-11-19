@@ -20,6 +20,10 @@ const routesMap = {
   SHOW_RENT_FORM: '/rent_item/:itemId',
   NEW_RENTAL: '/new_rent',
   SHOW_MAP: '/map',
+  SHOW_MY_OFFERS: {
+    path: '/my_offers',
+    thunk: getItems()
+  }
 }
 
 const {

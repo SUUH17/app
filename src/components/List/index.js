@@ -31,7 +31,7 @@ const Item = ({ data, openItem }) =>
     </div>
   </div>
 
-const List = ({ searchString, filteredItems, openItem, setFilter }) =>
+const List = ({ searchString, filteredItems, openItem, setFilter, filter }) =>
   <div>
     <Search className={styles.listSearch} />
     { false && <div className={styles.setFilter}>
@@ -39,7 +39,14 @@ const List = ({ searchString, filteredItems, openItem, setFilter }) =>
         <button>Mine</button>
     </div> }
     <div className={styles.list}>
-      {(filteredItems ||  []).map(item => 
+      {(filteredItems ||  [])
+        .filter(item => {
+          if (!item || !filter || !filter.ownerId) {
+            return item
+          }
+          return item.ownerId == filter.ownerId
+        })
+        .map(item => 
         <Item key={item.id} data={item} openItem={openItem} />)}
     </div>
   </div>

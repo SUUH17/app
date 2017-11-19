@@ -53,18 +53,17 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin }) =>
         <ItemInfo id={data.id} />
         {(data.ownerId != ownId)
           ? <span className={style.rentOptions}>
-            {loggedIn ? 'Rent using eRent: ' : 'Login to eRent: '}
             <button
               className={style.superRentButton}
               onClick={() => {
-                if (loggedIn) {
+                if (!loggedIn) {
                   goToLogin({ type: 'SHOW_RENT_FORM', payload: { itemId: data.id } })
                 } else {
                   openRent(data.id)
                 }
               }}
             >
-              {loggedIn ? 'Rent' : 'Login'}
+            Rent with eRent
             </button>
           </span>
           : <span className={style.yourInfo}>Offered by you</span>

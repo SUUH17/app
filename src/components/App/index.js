@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'redux-first-router-link'
-import { Home, Map, Box, FilePlus } from 'react-feather';
-import { connect } from 'react-redux'
+import { Home, Box, FilePlus, User } from 'react-feather';
+import { connect } from 'react-redux'
 
 import List from './../List'
 import Modal from './../Modal'
@@ -18,30 +18,30 @@ const Logo = () =>
     Logo
   </div>
 
-const Header = ({page}) =>
+const Header = ({ page }) =>
   <div className={style.header}>
     <div className={style.nav}>
       <NavLink
         activeClassName={style.activeLink}
         exact={true}
-        className={style.link} to={{type: 'NEW_RENTAL'}}>
+        className={style.link} to={{ type: 'NEW_RENTAL' }}>
         <FilePlus />
         New rental
       </NavLink>
       <NavLink
         activeClassName={style.activeLink}
-        className={style.link} to={{type: 'SHOW_RENT'}}>
+        className={style.link} to={{ type: 'SHOW_RENT' }}>
         <Box />
         Rent
       </NavLink>
       <NavLink
         activeClassName={style.activeLink}
-        className={style.link} to={{type: 'SHOW_MAP'}}>
-        <Map />
-        Map
-      </NavLink>
+        className={style.link} to={{ type: 'SHOW_MY_OFFERS' }}>
+        <User />
+        My offers
+    </NavLink>
     </div>
-    { page.indexOf('SHOW_RENT') >= 0 && <Search className={style.navSearch} /> }
+    {(page.indexOf('SHOW_RENT') >= 0 || page === 'SHOW_MY_OFFERS') && <Search className={style.navSearch} />}
   </div>
 
 const HomeView = () =>
@@ -49,7 +49,7 @@ const HomeView = () =>
     <h1>Welcome to Suuh</h1>
   </div>
 
-const getView = (page) => {
+const getView = (page, ownerId) => {
   switch (page) {
     case 'HOME':
       return <HomeView />
@@ -58,6 +58,8 @@ const getView = (page) => {
     case 'SHOW_RENT':
     case 'SHOW_RENT_MODAL':
       return <List />
+    case 'SHOW_MY_OFFERS':
+      return <List filter={{ownerId}} />
     case 'NEW_RENTAL':
       return <NewRent />
     default:
@@ -65,23 +67,24 @@ const getView = (page) => {
   }
 }
 
-const App = ({page, cookieToRedux}) => {
+const App = ({ page, cookieToRedux, ownId}) => {
   cookieToRedux(document.cookie)
   return <div>
     <Header page={page} />
     <div className={style.content}>
-      { getView(page) }
+      {getView(page, ownId)}
     </div>
     <Modal />
   </div>
 }
 
 const mapStateToProps = state => ({
-  page: state.location.type
+  page: state.location.type,
+  ownId: state.user.ownerId
 })
 
 const mapDispatchToProps = dispatch => ({
   cookieToRedux: (cookie) => dispatch(cookieToRedux(cookie))
 })
 
-export default  connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
