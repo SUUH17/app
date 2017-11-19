@@ -36,7 +36,7 @@ class Login extends React.Component {
     return (
       <div className={styles.container}>
         <h2>Login</h2>
-        <span>Use your eRent credentials</span>
+        <span>Use your cRent credentials</span>
         <div className={styles.loginForm}>
           <Field field="username" type="text" handler={this.handleInput} label="Username" />
           <Field field="password" type="password" handler={this.handleInput} label="Password" />

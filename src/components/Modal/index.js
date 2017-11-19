@@ -63,7 +63,7 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, return
                 }
               }}
             >
-              Rent with eRent
+              Rent with cRent
             </button>
           </span>
           : <span className={style.yourInfo}>
@@ -129,7 +129,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   dismiss: ({type, payload}) => {
-    console.log(type, payload)
+    if (type === 'SHOW_LOGIN' || type === 'SHOW_RENT_FORM') {
+      dispatch(dismissModal({type: 'SHOW_RENTS', payload}))
+    }
     dispatch(dismissModal({type, payload}))
   }
 })
