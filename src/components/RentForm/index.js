@@ -38,7 +38,7 @@ class RentForm extends React.Component {
       <div className={style.container}>
         <h2>cRent</h2>
         <h3>
-          This Agreement is entered into between {rentee} (“Rentee”) and {renter} (“Renter”) (collectively the “Parties”) and outlines the respective rights and obligations of the Parties relating to the rental of the item.
+          This Agreement is entered into between <b className={style.rentee}>{rentee}</b> (“Rentee”) and <b className={style.renter}>{renter}</b> (“Renter”) (collectively the “Parties”) and outlines the respective rights and obligations of the Parties relating to the rental of the item.
         </h3>
         <div className={style.rentalForm}>
           <div className={style.formField}>

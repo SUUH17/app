@@ -68,6 +68,14 @@
   100%   { transform: rotate(359deg); }
 }
 
+.rentee {
+  color: $green;
+}
+
+.renter {
+  color: $accentcolor;
+}
+
 .acceptance {
   @extend .field;
   font-size: 1.2em;
