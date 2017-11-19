@@ -15,7 +15,7 @@ export const test = (state = initialState, action) => {
   }
 }
 
-export const user = (state = { ownerId: '', loggedIn: false, error: false }, action) => {
+export const user = (state = { ownerId: '', loggedIn: false, error: false, users: []}, action) => {
   switch (action.type) {
     case 'LOGIN_START':
       return {
@@ -38,6 +38,11 @@ export const user = (state = { ownerId: '', loggedIn: false, error: false }, act
         ownerId: undefined,
         loggedIn: false,
         error: true
+      }
+    case 'SET_USERS':
+      return {
+        ...state,
+        users: action.value
       }
     default:
       return state

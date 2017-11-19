@@ -5,7 +5,7 @@ const getSearchString = state => state.search.searchString
 
 const getItems = state => state.api.items
 
-const getItemById = (state, props) => {
+export const getItemById = (state, props) => {
   const items = state.api.items
   const filtered = items.filter(it =>
     it.id === props.id
@@ -31,4 +31,13 @@ const itemMatch = (i, s) => {
     return i.name.toLowerCase().indexOf(s.toLowerCase()) >= 0
     || i.location.toLowerCase().indexOf(s.toLowerCase()) >= 0
   }
+}
+
+const getUsers = state => state.user.users
+
+export const getUserById = (state, props) => {
+  const filtered = getUsers(state).filter(it =>
+    it.id === props.ownerId
+  )
+  return filtered[0] || {}
 }

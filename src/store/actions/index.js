@@ -74,6 +74,7 @@ export function getItem (id) {
 
 export function getItems () {
   return dispatch => {
+    dispatch(loadUsers())
     dispatch(startGetItem)
     return fetch(API_BASE + 'items/', {
       credentials: 'include',
@@ -316,5 +317,20 @@ export function attemptReturn (id) {
         console.log(err)
         dispatch(failedRentAttempt)
       })
+  }
+}
+
+export function loadUsers () {
+  return dispatch => {
+    return fetch(API_BASE + 'users', {
+      credentials: 'include'
+    })
+    .then(res => res.json())
+    .then(users => {
+      dispatch({type: 'SET_USERS', value: users})
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 }
