@@ -14,20 +14,21 @@ import { cookieToRedux } from './../../store/actions'
 import style from './app.scss'
 
 const Logo = () =>
-  <div>
-    Logo
+  <div className={style.logo}>
+    CameraRent
   </div>
 
 const Header = ({ page }) =>
   <div className={style.header}>
     <div className={style.nav}>
-      <NavLink
+      { false && <NavLink
         activeClassName={style.activeLink}
         exact={true}
         className={style.link} to={{ type: 'NEW_RENTAL' }}>
         <FilePlus />
         New rental
-      </NavLink>
+      </NavLink>}
+      <Logo />
       <NavLink
         activeClassName={style.activeLink}
         className={style.link} to={{ type: 'SHOW_RENT' }}>
