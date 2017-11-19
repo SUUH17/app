@@ -1,0 +1,56 @@
+@import './../../style/main.scss';
+
+.container {
+  @extend .card;
+  margin-bottom: 6em;
+  max-width: 30em;
+
+  @media (min-width: 768px) {
+    margin: auto;
+  }
+}
+
+.rentalForm {
+  max-width: 30em;
+  @extend .form;
+}
+
+.formField {
+  @extend .field;
+  padding: 1em 0;
+
+  label {
+    font-size: 1.1em;
+  }
+}
+
+.button {
+  @extend .roundedButton;
+  transition: opacity .2s;
+}
+
+.greenButton {
+  background: $green;
+}
+
+.hiddenButton {
+  opacity: 0;
+}
+
+.cancelButton {
+  @extend .roundedButton;
+  background: transparent;
+  border: 1px solid $red;
+  color: $red;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.imagePreview {
+  display: block;
+  width: 100%;
+  height: auto;
+}

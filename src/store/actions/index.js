@@ -12,7 +12,7 @@ export function dismissModal (paramAction = toHome) {
   return dispatch => {
     dispatch(closeModal)
     if (!paramAction.type) {
-      dispatch({type: 'SHOW_RENTS'})
+      dispatch({ type: 'SHOW_RENTS' })
     } else {
       dispatch(paramAction)
     }
@@ -212,10 +212,21 @@ export function login (username, password) {
   }
 }
 
-export function checkLogin () {
-  console.log('checkLogin')
+export function logout () {
   return dispatch => {
-    console.log('checking')
+    console.log('logging out')
+    return fetch(API_BASE + 'auth/logout', {
+      method: 'POST',
+      credentials: 'include'
+    })
+      .then(() => {
+        dispatch(checkLogin())
+      })
+  }
+}
+
+export function checkLogin () {
+  return dispatch => {
     const ownerId = getOwnerId()
     if (ownerId) {
       console.log('has cookie')
@@ -325,12 +336,12 @@ export function loadUsers () {
     return fetch(API_BASE + 'users', {
       credentials: 'include'
     })
-    .then(res => res.json())
-    .then(users => {
-      dispatch({type: 'SET_USERS', value: users})
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(res => res.json())
+      .then(users => {
+        dispatch({ type: 'SET_USERS', value: users })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }

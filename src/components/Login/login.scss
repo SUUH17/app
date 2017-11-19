@@ -1,9 +1,11 @@
 @import './../../style/main.scss';
 
 .container {
+  @extend .card;
+  border: none;
+  margin: auto;
   margin-bottom: 6em;
   max-width: 30em;
-  min-width: 30em;
 }
 
 .loginForm {

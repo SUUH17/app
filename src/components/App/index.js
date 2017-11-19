@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'redux-first-router-link'
-import { Home, Box, FilePlus, User } from 'react-feather';
+import { Home, Box, FilePlus, User, Activity } from 'react-feather';
 import { connect } from 'react-redux'
 
 import List from './../List'
@@ -8,6 +8,7 @@ import Modal from './../Modal'
 import MapView from './../Map'
 import Search from './../Search'
 import NewRent from './../NewRent'
+import ProfileView from './../ProfileView'
 
 import { cookieToRedux } from './../../store/actions'
 
@@ -38,22 +39,24 @@ const Header = ({ page }) =>
       <NavLink
         activeClassName={style.activeLink}
         className={style.link} to={{ type: 'SHOW_MY_OFFERS' }}>
-        <User />
+        <Activity />
         Rented
-    </NavLink>
+      </NavLink>
+      <NavLink
+        activeClassName={style.activeLink}
+        exact
+        className={style.link} to={{ type: 'HOME' }}>
+        <User />
+        Profile
+      </NavLink>
     </div>
     {(page.indexOf('SHOW_RENTS') >= 0 || page === 'SHOW_MY_OFFERS') && <Search className={style.navSearch} />}
-  </div>
-
-const HomeView = () =>
-  <div>
-    <h1>Welcome to Suuh</h1>
   </div>
 
 const getView = (page, ownerId) => {
   switch (page) {
     case 'HOME':
-      return <HomeView />
+      return <ProfileView />
     case 'SHOW_MAP':
       return <Map />
     case 'SHOW_RENTS':

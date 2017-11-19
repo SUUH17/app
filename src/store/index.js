@@ -10,7 +10,10 @@ import { test, modal, search, api, user } from './reducers'
 const history = createHistory()
 
 const routesMap = {
-  HOME: '/',
+  HOME: {
+    path: '/',
+    thunk: getItems()
+  },
   SHOW_LOGIN: '/login',
   SHOW_RENT: {
     path: '/rent/:itemId',
