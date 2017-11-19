@@ -194,7 +194,7 @@ export function login (username, password) {
       .then(res => res.status === 200)
       .then(yes => {
         if (yes) {
-          dispatch({
+          return dispatch({
             type: 'LOGIN_SUCCESS', value: {
               ownerId: getOwnerId()
             }

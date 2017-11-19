@@ -32,7 +32,7 @@ const RentModal = ({ dismiss }) =>
     </div>
   </div>
 
-const ItemModal = ({ data, dismiss, openRent, ownId }) =>
+const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin }) =>
   <div className={style.flexContainer}>
     <div className={style.modalHeader}>
       <ArrowLeft onClick={dismiss} />
@@ -51,12 +51,24 @@ const ItemModal = ({ data, dismiss, openRent, ownId }) =>
           <span className={style.price}>{data.price + ' €/h'}</span>
         </div>
         <ItemInfo id={data.id} />
-        { (data.ownerId != ownId) ? <span className={style.rentOptions}>Rent using eRent: <button
-          className={style.superRentButton}
-          onClick={() => openRent(data.id)}
-        >
-          Rent
-      </button></span> : <span className={style.yourInfo}>Offered by you</span> }
+        {(data.ownerId != ownId)
+          ? <span className={style.rentOptions}>
+            { loggedIn ? 'Rent using eRent: ' : 'Login to eRent: ' }
+              <button
+              className={style.superRentButton}
+              onClick={() => {
+                if (!loggedIn) {
+                  goToLogin()
+                } else {
+                  openRent(data.id)
+                }
+              }}
+            >
+            { loggedIn ? 'Rent' : 'Login' }
+            </button>
+          </span>
+          : <span className={style.yourInfo}>Offered by you</span>
+        }
       </div>
     </div>) : (
         <div className={style.loading}>
@@ -67,11 +79,13 @@ const ItemModal = ({ data, dismiss, openRent, ownId }) =>
 
 const mapItemStateToProps = (state, props) => ({
   data: selectItem(state, props),
-  ownId: state.user.ownerId
+  ownId: state.user.ownerId,
+  loggedIn: state.user.loggedIn
 })
 
 const mapItemDispatchToProps = dispatch => ({
-  openRent: (itemId) => dispatch({ type: 'SHOW_RENT_FORM', payload: { itemId } })
+  openRent: (itemId) => dispatch({ type: 'SHOW_RENT_FORM', payload: { itemId } }),
+  goToLogin: () => dispatch({type: 'SHOW_LOGIN'})
 })
 
 const RentalItemModal = connect(mapItemStateToProps, mapItemDispatchToProps)(ItemModal)
@@ -88,7 +102,7 @@ const ModalContainer = ({ visible, itemId, dismiss, location }) =>
           <LoginModal dismiss={dismiss} />}
         {location === 'SHOW_RENT_MODAL' &&
           <RentalItemModal dismiss={dismiss} id={itemId} />}
-        {location === 'SHOW_RENT_FORM' && 
+        {location === 'SHOW_RENT_FORM' &&
           <RentModal dismiss={dismiss} />
         }
       </div>

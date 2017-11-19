@@ -17,11 +17,13 @@ class RentForm extends React.Component {
     }
   }
   render () {
-    const { itemId, rent, renting, rentingSuccess, rentingFailed } = this.props
+    const { itemId, rent, renting, rentingSuccess, rentingFailed, loggedIn } = this.props
     return (
       <div className={style.container}>
         <h2>Rent</h2>
-        <h3>Accept conditions</h3>
+        <h3>
+          This Agreement is entered into between [ITEM OWNER] (“Owner”) and [RENTER] (“Renter”) (collectively the “Parties”) and outlines the respective rights and obligations of the Parties relating to the rental of the item.
+        </h3>
         <div className={style.rentalForm}>
           <div className={style.formField}>
             <label>Parties</label>
@@ -54,6 +56,7 @@ class RentForm extends React.Component {
 const mapStateToProps = state => ({
   itemId: state.location.payload.itemId,
   renting: state.api.renting,
+  loggedIn: state.user.loggedIn,
   rentingSuccess: state.api.rentingSuccess,
   rentingFailed: state.api.rentingFailed
 })
