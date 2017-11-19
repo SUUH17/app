@@ -44,7 +44,7 @@ const List = ({ searchString, filteredItems, openItem, setFilter, filter }) =>
           if (!item || !filter || !filter.ownerId) {
             return item
           }
-          return item.ownerId == filter.ownerId
+          return (item.ownerId == filter.ownerId && item.available == filter.available)
         })
         .map(item => 
         <Item key={item.id} data={item} openItem={openItem} />)}

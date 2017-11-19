@@ -32,13 +32,13 @@ const Header = ({ page }) =>
         activeClassName={style.activeLink}
         className={style.link} to={{ type: 'SHOW_RENT' }}>
         <Box />
-        Rent
+        Rents
       </NavLink>
       <NavLink
         activeClassName={style.activeLink}
         className={style.link} to={{ type: 'SHOW_MY_OFFERS' }}>
         <User />
-        My offers
+        Rented
     </NavLink>
     </div>
     {(page.indexOf('SHOW_RENT') >= 0 || page === 'SHOW_MY_OFFERS') && <Search className={style.navSearch} />}
@@ -59,7 +59,7 @@ const getView = (page, ownerId) => {
     case 'SHOW_RENT_MODAL':
       return <List />
     case 'SHOW_MY_OFFERS':
-      return <List filter={{ownerId}} />
+      return <List filter={{ownerId, available: 0}} />
     case 'NEW_RENTAL':
       return <NewRent />
     default:
