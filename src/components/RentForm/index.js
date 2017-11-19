@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Loader } from 'react-feather'
 
 import Field from './../Field'
 import ItemInfo from './../ItemInfo'
 
-import {  attemptRent } from './../../store/actions'
+import { attemptRent } from './../../store/actions'
 
 import style from './rentForm.scss'
 
@@ -33,11 +34,18 @@ class RentForm extends React.Component {
           <ItemInfo id={itemId} />
 
         </div>
-        <button
-          className={style.rentButton}
-          onClick={() => rent(itemId)}
-        >Accept & Rent
-        </button>
+        <div className={style.rentAction}>
+          {renting && <Loader />}
+          <button
+            className={style.rentButton}
+            onClick={() => rent(itemId)}
+          >
+            {renting && 'Renting...'}
+            {rentingSuccess && 'Success'}
+            {rentingFailed && 'Renting failed'}
+            {(!renting && !rentingSuccess && !rentingFailed) && 'Accept & Rent'}
+          </button>
+        </div>
       </div>
     )
   }

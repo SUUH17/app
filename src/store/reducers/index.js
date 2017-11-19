@@ -53,6 +53,7 @@ export const modal = (state = { visible: false }, action) => {
         ...state,
         visible: true
       }
+    case 'SHOW_RENT':
     case 'CLOSE_MODAL':
       return {
         ...state,

@@ -11,10 +11,24 @@
 
 .rentButton {
   @extend .roundedButton;
+  background: $green;
+}
+
+.rentAction {
   margin-top: 2em;
   font-size: 1.2em;
-  background: $green;
   float: right;
+  display: flex;
+  align-items: center;
+
+  svg {
+    color: #7b7b7b;
+    animation: spin 1s infinite;
+  }
+
+  button {
+    margin-left: .4em;
+  }
 }
 
 .rentalForm {
@@ -53,4 +67,9 @@
 }
 
 .infoTable {
+}
+
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100%   { transform: rotate(359deg); }
 }
