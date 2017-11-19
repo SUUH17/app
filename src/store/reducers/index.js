@@ -188,6 +188,18 @@ export const api = (state = {
         rentingError: true,
         rentingSuccess: false
       }
+    case 'CLOSE_MODAL':
+      return {
+        ...state,
+        apiLoading: false,
+        apiError: false,
+        uploading: false,
+        uploadError: false,
+        uploadSuccess: false,
+        renting: false,
+        rentingError: false,
+        rentingSuccess: false
+      }
     default:
       return state
   }

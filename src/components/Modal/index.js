@@ -32,7 +32,7 @@ const RentModal = ({ dismiss, prev }) =>
     </div>
   </div>
 
-const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, returnItem, prev }) =>
+const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, returnItem, prev, renting, rentingSuccess }) =>
   <div className={style.flexContainer}>
     <div className={style.modalHeader}>
       <ArrowLeft onClick={() => dismiss(prev)} />
@@ -54,6 +54,9 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, return
         {
           (data.ownerId != ownId)
             ? <span className={style.rentOptions}>
+              {renting && <span className={style.rentSpinner}>
+                <Loader className={style.spinner} />
+              </span>}
               {!!data.available ?
                 <button
                   className={style.superRentButton}
@@ -70,9 +73,12 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, return
                   Not available
                 </span>}
             </span>
-            : (<span className={style.yourInfo}>
+            : (<div className={style.yourInfo}>
               Offered by you.
               {!data.available && <div>
+                {renting && <span className={style.rentSpinner}>
+                  <Loader className={style.spinner} />
+                </span>}
                 <button
                   className={style.redButton}
                   onClick={() => returnItem(data.id)}
@@ -86,7 +92,7 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, return
                   Return
                   </button>
               </div>}
-            </span>)
+            </div>)
         }
       </div>
     </div>) : (
@@ -99,7 +105,10 @@ const ItemModal = ({ data, dismiss, openRent, ownId, loggedIn, goToLogin, return
 const mapItemStateToProps = (state, props) => ({
   data: selectItem(state, props),
   ownId: state.user.ownerId,
-  loggedIn: state.user.loggedIn
+  loggedIn: state.user.loggedIn,
+  renting: state.api.renting,
+  rentingSuccess: state.api.rentingSuccess,
+  rentingFailed: state.api.rentingFailed
 })
 
 const mapItemDispatchToProps = dispatch => ({
